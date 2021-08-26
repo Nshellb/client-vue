@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <script src="script.js"></script>
+  <title>Used car Hyperledger Fabric</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+
+  <!-- font -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <style type="text/css">
+    /* change the background color */
+    .navbar-custom {
+      background-color: #28467c;
+    }
+
+    /* change the brand and text color */
+    .navbar-custom .navbar-brand,
+    .navbar-custom .navbar-text {
+      color: rgb(255, 255, 255);
+    }
+
+    /* change the link color */
+    .navbar-custom .navbar-nav .nav-link {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* change the color of active or hovered links */
+    .navbar-custom .nav-item.active .nav-link,
+    .navbar-custom .nav-item:focus .nav-link,
+    .navbar-custom .nav-item:hover .nav-link {
+      color: #ffffff;
+    }
+
+    h1, h3, h5 {
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    h1 {
+      font-size: 20px;
+    }
+
+    h3 {
+      font-size: 16px;
+    }
+
+    h5 {
+      font-family: 'Noto Sans KR', sans-serif;
+      font-size: 18px;
+    }
+
+    body {
+      background-color: #F2F2F2;
+    }
+
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td,
+    th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #F1F1F1;
+    }
+
+    thead {
+      background-color: #3d67b6;
+      color: #FFFFFF;
+      font-family: 'Noto Sans', sans-serif;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 400;
+    }
+
+    tbody {
+      background-color: #FFFFFF;
+      font-family: 'Noto Sans', sans-serif;
+      font-family: 'Noto Sans KR', sans-serif;
+      font-weight: 400;
+    }
+
+    .create_car_text {
+      font-family: 'Noto Sans', sans-serif;
+      font-family: 'Noto Sans KR', sans-serif;
+    }
+
+    .search_wallet, .getCar, .purchaseCar, 
+    .create_car, .delete_car {
+      margin-bottom: 15px;
+    }
+
+    .search_wallet {
+      margin-top: 15px;
+    }
+
+    .form-control {
+      margin: 8px;
+    }
+
+    #right_header {
+      width: 20%;
+      font-size: 15px;
+      margin-right: 0px;
+    }
+
+    #left_header {
+      margin-left: 0;
+      width: 40%;
+      display: inline-block;
+    }
+
+    #id {
+      width: 49%;
+      display: inline-block;
+    }
+
+    footer {
+      text-align: center;
+      display: block;
+      background-color: #444;
+      color: #ccc;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body ng-app="application" ng-controller="AppCtrl">
+  
+  <!-- 네비게이션 바 코드 시작 -->
+  <nav class="navbar navbar-expand-md navbar-custom">
+    <div class="container">
+      <a class="navbar-brand" href="/index.html">Used car</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse"   data-target="#collapsibleNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="/usedcar_information/index.html">차량 정보 조회</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/usedcar_deal/index.html">중고차 거래</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/car_insurance/index.html">차량 보험</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/car_repair/index.html">차량 수리</a>
+          </li>
+          <!-- 로그인 추가 필요 -->
+          <div class="nav_btn">
+            <button class="btn btn-outline-success" type="submit">login</button>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- 네비게이션 바 코드 끝 -->
+
+  <!-- BS -->
+  <div class="container">
+
+    <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* check line start *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* -->
+
+    <!-- have to list : table style, form-control -->
+
+    <!-- search_wallet start -->
+    <div class="search_wallet">
+      <form>
+        <h1>지갑 검색</h1>
+        <div class="form-row align-items-center">
+          <!-- input -->
+          <div class="col-sm-3 my-1">
+            <input type="text" class="form-control" placeholder="Ex: 1Q2W3E4R" ng-model="walletid">
+          </div>
+          <!-- btn -->
+          <div class="col-auto my-1">
+            <input id="getWallet" type="submit" value="Search" class="btn btn-primary" ng-click="getWallet()">
+          </div>
+        </div>
+        <h5 style="color:green;margin-bottom:2%" id="success_getwallet">{{search_wallet}}</h5>
+      </form>
+    </div>
+    <!-- search_wallet end -->
+
+    <!-- getCar start -->
+    <div class="getCar">
+      <form>
+        <h1>차 매물 조회</h1>
+        <div class="form-row align-items-center">
+          <!-- input -->
+          <div class="col-sm-3 my-1">
+            <input class="form-control" type="text" placeholder="Ex: CAR1" ng-model="carkey">
+          </div>
+          <!-- btn -->
+          <div class="col-auto my-1">
+            <input id="getCar" type="submit" value="Search" class="btn btn-primary" ng-click="getCar()">
+            <input id="getAllCar" type="submit" value="Get all car" class="btn btn-primary" ng-click="getAllCar()">
+          </div>
+        </div>
+        <h5 style="color:green;margin-bottom:2%" id="success_getcar">Success to query</h5>
+      </form>
+    </div>
+    <!-- getCar end -->
+
+
+    <!-- purchaseCar start -->
+    <div class="purchaseCar">
+      <table id="allCar" class="table table-striped table-hover" align="center">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Model</th>
+            <th>Maker</th>
+            <th>Price</th>
+            <th>Owner</th>
+            <th>Buy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="car in allCar">
+            <td>{{car.Key}}</td>
+            <td>{{car.model}}</td>
+            <td>{{car.maker}}</td>
+            <td>{{car.price}}</td>
+            <td>{{car.walletid}}</td>
+            <td><input id="purchaseCar" type="submit" value="구매" ng-click="purchaseCar(car.Key)"></td>
+          </tr>
+        </tbody>
+        <h5 style="color:green;margin-bottom:2%" id="success_getallcar">{{purchase_car}}</h5>
+      </table>
+    </div>
+    <!-- purchaseCar end -->
+
+    <!-- create_car start -->
+    <div class="create_car">
+      <form>
+        <h1>차 매물 등록</h1>
+        <div class="create_car_text">
+          <h3>Model:</h3>
+          <input class="form-control" type="text" placeholder="Ex: K7" ng-model="car.model">
+          <h3>Maker: </h3>
+          <input class="form-control" type="text" placeholder="Ex: KIA" ng-model="car.maker">
+          <h3>Price: </h3>
+          <input class="form-control" type="text" placeholder="Ex: 20" ng-model="car.price">
+          <h3>Owner: </h3>
+          <input class="form-control" type="text" placeholder="Ex: 5T6Y7U8I" ng-model="car.walletid">
+          <input id="setCar" type="submit" value="Create" class="btn btn-primary" ng-click="setCar()">
+          <h5 style="color:green;margin-bottom:2%" id="success_setcar">{{create_car}}</h5>
+        </div>
+      </form>
+    </div>
+    <!-- create_car end -->
+
+    <!-- delete_car start -->
+    <div class="delete_car">
+      <form>
+        <h1>차 매물 삭제</h1>
+        <div class="form-row align-items-center">
+          <!-- input -->
+          <div class="col-sm-3 my-1">
+            <input class="form-control" type="text" placeholder="Ex: CAR0" ng-model="carkeydelete">
+          </div>
+          <!-- btn -->
+          <div class="col-auto my-1">
+            <input id="deleteCar" type="submit" value="Delete" class="btn btn-primary" ng-click="deleteCar()">
+          </div>
+        </div>
+        <h5 style="color:green;margin-bottom:2%" id="success_deletecar">{{delete_car}}</h5>
+      </form>
+    </div>
+    <!-- delete_car end -->
+
+
+    <!-- *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* check line end *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-* -->
+
+  </div>
+
+  <!-- footer -->
+  <div class="text-center footer">
+    <footer style="text-align:center" class="w-100">
+      <p class="about">
+        <a href="."><i class="fa fa-home"></i> Home</a> |
+        <a href="." rel="nofollow">About</a> |
+        <a href="." rel="nofollow">Contact</a> |
+        <a href="." rel="nofollow">Terms of Use</a> |
+        <a href="." rel="nofollow">Privacy Policy</a>
+      </p>
+      <p>© Copyright 2021 Hangaram </p>
+    </footer>
+  </div>
+  <!-- footer -->
+
+</body>
+<script type="text/javascript" src="../app.js"> </script>
+
+</html>
