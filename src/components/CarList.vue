@@ -19,8 +19,9 @@
                 <h5 style="color:green;margin-bottom:2%" id="success_getcar">Success to query</h5>
             </form>
         </div>
+        <!-- must need purchaseCar's table part.  -->
+        <!-- use with purchaseCar class where you use this page. -->
         <!-- getCar end -->
-
 
         <!-- purchaseCar start -->
         <div class="purchaseCar">
@@ -61,23 +62,37 @@ export default {
         getCar() {},
         getAllCar_click() {
             // api 호출로 가져온 데이터를 임시 공간에 저장
+            this.apiResponse = null;
+            const { data } = axios.get('/api/getAllCar'); // 전체 결과중에서 data 부분만 가져옴, { data } 미사용시 뒤에 각종 쿼리 결과까지 붙어옴...
+            //this.apiResponse = data;
+            console.log(data);
+            var array = []; // 데이터 정렬용 배열
+            for (var i = 0; i < data.length; i++){
+                parseInt(data[i].Key);
+                data[i].Record.Key = data[i].Key;
+                array.push(data[i].Record);
+            }
+            array.sort(function(a, b) {
+                return parseFloat(a.Key) - parseFloat(b.Key);
+            });
+            this.apiResponse = array;
         },
     },
-    async created () {
-        this.apiResponse = null;
-        const { data } = await axios.get('/api/getAllCar'); // 전체 결과중에서 data 부분만 가져옴, { data } 미사용시 뒤에 각종 쿼리 결과까지 붙어옴...
-        //this.apiResponse = data;
-        console.log(data);
-        var array = []; // 데이터 정렬용 배열
-        for (var i = 0; i < data.length; i++){
-            parseInt(data[i].Key);
-            data[i].Record.Key = data[i].Key;
-            array.push(data[i].Record);
-        }
-        array.sort(function(a, b) {
-            return parseFloat(a.Key) - parseFloat(b.Key);
-        });
-        this.apiResponse = array;
-    }
+    // async created () {
+    //     this.apiResponse = null;
+    //     const { data } = await axios.get('/api/getAllCar'); // 전체 결과중에서 data 부분만 가져옴, { data } 미사용시 뒤에 각종 쿼리 결과까지 붙어옴...
+    //     //this.apiResponse = data;
+    //     console.log(data);
+    //     var array = []; // 데이터 정렬용 배열
+    //     for (var i = 0; i < data.length; i++){
+    //         parseInt(data[i].Key);
+    //         data[i].Record.Key = data[i].Key;
+    //         array.push(data[i].Record);
+    //     }
+    //     array.sort(function(a, b) {
+    //         return parseFloat(a.Key) - parseFloat(b.Key);
+    //     });
+    //     this.apiResponse = array;
+    // }
 }
 </script>

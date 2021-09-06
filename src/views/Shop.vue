@@ -9,6 +9,8 @@
           New Arrivals Women Collection 2018
       </p>
     </section>
+
+    <p>Here is routing test page.</p>
   </div>
 </template>
 

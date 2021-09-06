@@ -35,6 +35,10 @@
                                 <a>Repair</a>
                             </router-link>
 
+                            <router-link :to="{name: 'test'}" tag="li" active-class="sale-noti" exact>
+                                <a>Test</a>
+                            </router-link>
+
                             <router-link :to="{name: 'shop'}" tag="li" active-class="sale-noti" exact>
                                 <a>Shop</a>
                             </router-link>
@@ -208,6 +212,12 @@
                     <li class="item-menu-mobile">
                         <router-link :to="{name: 'repair'}" active-class="sale-noti" exact>
                             <a>Repair</a>
+                        </router-link>
+                    </li>
+
+                    <li class="item-menu-mobile">
+                        <router-link :to="{name: 'test'}" active-class="sale-noti" exact>
+                            <a>Test</a>
                         </router-link>
                     </li>
                 </ul>

@@ -5,6 +5,7 @@ import Lookup from '@/views/lookup/CarLookup.vue'
 import Purchase from '@/views/purchase/CarPurchase.vue'
 import Insurance from '@/views/insurance/CarInsurance.vue'
 import Repair from '@/views/repair/CarRepair.vue'
+import Test from '@/views/test/CarTest.vue'
 import Shop from '@/views/Shop.vue'
 
 Vue.use(Router)
@@ -37,6 +38,11 @@ export default new Router({
       path: '/repair',
       name: 'repair',
       component: Repair
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: Test
     },
     {
       path: '/shop',
