@@ -11,7 +11,7 @@
                     </div>
                     <!-- btn -->
                     <div class="col-auto my-1">
-                        <button id="getWallet" type="button" value="Search" class="btn btn-primary" @click="getWallet"></button>
+                        <button id="getWallet" type="button" value="Search" class="btn btn-primary" @click="getWallet">Search</button>
                     </div>
                 </div>
                 <h5 style="color:green;margin-bottom:2%" id="success_getwallet">{{search_wallet}}</h5>
@@ -27,43 +27,35 @@ import axios from 'axios';
 export default {
     data() {
         return {
-            walletid: '', // 입력 필드 및 전달값
             search_wallet: [],
-            apiResponse: [],
         };
     },
     methods: {
         getWallet(walletid) {
-            axios.get('/api/getWallet?walletid=' + this.walletid)
-            .then(response => {
-                this.search_wallet = response;
+            axios.get('/api/getWallet', { // controller.js 의 /api/getWallet 를 호출
+                params: { // parameter 호출 구문
+                    walletid: this.walletid
+                }
+            }).then(response => { // 결과 반환 부분
+                const { data } = response; // 반환되는 결과중에서 data 부분만 가져옴
+                console.log(data);
+                console.log("success_getwallet");
+                this.search_wallet = data; // 화면에 출력되는 부분에 저장
             })
                 // .catch(error => {
                 //     alert(error)
                 // })
-            // api 호출로 가져온 데이터를 임시 공간에 저장
         },
+        // getWallet(walletid) { // 이전버전 참고용
+        //     axios.get('/api/getWallet?walletid=' + this.walletid)
+        //     .then(response => {
+        //         this.search_wallet = response;
+        //     })
+        //         // .catch(error => {
+        //         //     alert(error)
+        //         // })
+        //     // api 호출로 가져온 데이터를 임시 공간에 저장
+        // },
     },
-    async created () {
-        this.apiResponse = null;
-        const { data } = await axios.get('/api/getAllCar'); // 전체 결과중에서 data 부분만 가져옴, { data } 미사용시 뒤에 각종 쿼리 결과까지 붙어옴...
-        //this.apiResponse = data;
-        console.log(data);
-        var array = []; // 데이터 정렬용 배열
-        for (var i = 0; i < data.length; i++){
-            parseInt(data[i].Key);
-            data[i].Record.Key = data[i].Key;
-            array.push(data[i].Record);
-        }
-        array.sort(function(a, b) {
-            return parseFloat(a.Key) - parseFloat(b.Key);
-        });
-        this.apiResponse = array;
-
-        appFactory.getWallet($scope.walletid, function(data){
-            $scope.search_wallet = data;
-            $("#success_getwallet").show();
-        });
-    }
 }
 </script>
