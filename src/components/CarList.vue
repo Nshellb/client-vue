@@ -38,8 +38,16 @@
                     <td>{{car.maker}}</td>
                     <td>{{car.price}}</td>
                     <td>{{car.walletid}}</td>
-                    <td><input id="purchaseCar" type="button" value="구매" @click="purchaseCar"></td>
+                    <td><button class="btn btn-primary" id="purchaseCar" type="button" value="구매" @click="purchaseCar">구매</button></td>
                 </tr>
+                <!-- <tr>
+                    <td>TEST</td>
+                    <td>TEST</td>
+                    <td>TEST</td>
+                    <td>TEST</td>
+                    <td>TEST</td>
+                    <td><button class="btn btn-primary" id="purchaseCar" type="button" value="구매" @click="purchaseCar">구매</button></td>
+                </tr> -->
             </table>
             <h5 style="color:green;margin-bottom:2%" id="success_getallcar">{{purchase_car}}</h5>
             {{apiResponse}}
@@ -61,7 +69,7 @@ export default {
         getCar(carkey) {
             this.apiResponse = null; // 받아온값이 저장되는 변수 초기화
             axios.get('/api/getCar', { // controller.js 의 /api/getWallet 를 호출
-                params: { // parameter 호출 구문
+                params: { // parameter 전달 구문
                     carkey: this.carkey
                 }
             }).then(response => { // 결과 반환 부분
@@ -110,8 +118,45 @@ export default {
                 // })
         },
         purchaseCar() {
-            d
+            let allCar = document.getElementById('allCar');
+            let selectCar = '';
+            let walletid = '';
+
+            for (let i = 1; i < allCar.rows.length; i++) {
+                allCar.rows[i].cells[5].onclick = function () {
+                    selectCar = allCar.rows[i].cells[0].innerText;
+                    walletid = allCar.rows[i].cells[4].innerText;
+                    alert(selectCar+"와 "+walletid+"을 선택하셨습니다.");
+                    axios.get('/api/purchaseCar', { // controller.js 의 /api/purchaseCar 를 호출
+                        params: { // parameter 전달 구문
+                            walletid: walletid,
+                            carkey: selectCar,
+                        }
+                    }).then(response => { // 결과 반환 부분
+                        var array = []; // 데이터 정렬용 배열
+                        for (var i = 0; i < data.length; i++){
+                                parseInt(data[i].Key);
+                                data[i].Record.Key = data[i].Key;
+                                array.push(data[i].Record);
+                        }
+                        array.sort(function(a, b) {
+                            return parseFloat(a.Key) - parseFloat(b.Key);
+                        });
+                        this.apiResponse = array; // 화면에 출력되는 부분에 저장
+                    })
+                }
+            }
         },
+        // purchaseCar() { // 표 내용 값 가져오기 참고용
+        //     let allCar = document.getElementById('allCar');
+
+        //     for (let i = 1; i < allCar.rows.length; i++) {
+        //         allCar.rows[i].cells[5].onclick = function () {
+        //             let selectCar = allCar.rows[i].cells[0].innerText;
+        //             alert(selectCar+"을 선택하셨습니다.");
+        //         }
+        //     }
+        // },
         // getAllCar_click() { // 이전버전 참고용
         //     // api 호출로 가져온 데이터를 임시 공간에 저장
         //     this.apiResponse = null;
