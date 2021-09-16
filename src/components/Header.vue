@@ -242,3 +242,20 @@ export default {
     
 }
 </script>
+
+<style>
+/* .logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+} */
+
+/* 상단바 스타일 */
+.header1 {
+    height: 78px;
+}
+/* .wrap_header, .wrap_header_mobile {
+    background-color: #28467c;
+} */
+
+</style>

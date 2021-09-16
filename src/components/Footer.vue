@@ -1,7 +1,7 @@
 <template>
     <footer class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">
-        <div>
-            <h4 class="s-text12 p-b-30">
+        <div style="height: 60px;">
+            <h4 class="s-text3 p-b-30">
                 Address
             </h4>
             <p class="s-text7">
@@ -24,3 +24,10 @@ export default {
     
 }
 </script>
+
+<style>
+/* footer 여백 맞추기 */
+h4.s-text3.p-b-30{
+    padding-bottom: 6px;
+}
+</style>

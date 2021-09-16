@@ -49,8 +49,8 @@
                     <td><button class="btn btn-primary" id="purchaseCar" type="button" value="구매" @click="purchaseCar">구매</button></td>
                 </tr> -->
             </table>
-            <h5 style="color:green;margin-bottom:2%" id="success_getallcar">{{purchase_car}}</h5>
-            {{apiResponse}}
+            <h5 style="color:green;margin-bottom:2%" id="success_getallcar">{{ purchase_car }}</h5>
+            {{ apiResponse }}
         </div>
         <!-- purchaseCar end -->
     </div>
@@ -135,9 +135,9 @@ export default {
                     }).then(response => { // 결과 반환 부분
                         var array = []; // 데이터 정렬용 배열
                         for (var i = 0; i < data.length; i++){
-                                parseInt(data[i].Key);
-                                data[i].Record.Key = data[i].Key;
-                                array.push(data[i].Record);
+                            parseInt(data[i].Key);
+                            data[i].Record.Key = data[i].Key;
+                            array.push(data[i].Record);
                         }
                         array.sort(function(a, b) {
                             return parseFloat(a.Key) - parseFloat(b.Key);
@@ -149,7 +149,7 @@ export default {
         },
         // purchaseCar() { // 표 내용 값 가져오기 참고용
         //     let allCar = document.getElementById('allCar');
-
+        //
         //     for (let i = 1; i < allCar.rows.length; i++) {
         //         allCar.rows[i].cells[5].onclick = function () {
         //             let selectCar = allCar.rows[i].cells[0].innerText;
@@ -157,6 +157,7 @@ export default {
         //         }
         //     }
         // },
+        //
         // getAllCar_click() { // 이전버전 참고용
         //     // api 호출로 가져온 데이터를 임시 공간에 저장
         //     this.apiResponse = null;

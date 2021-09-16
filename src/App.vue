@@ -16,12 +16,7 @@ export default {
     Footer,
   },
   mounted() {
-    $(".selection-1").select2({
-      minimumResultsForSearch: 20,
-      dropdownParent: $('#dropDownSelect1')
-    });
-
-    $.initialize();
+    $.initialize(); // header 의 drop down 기능. public/js/main.js
   },
 }
 </script>
