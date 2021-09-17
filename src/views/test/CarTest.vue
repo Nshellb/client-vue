@@ -4,6 +4,9 @@
     <CarList/>
     <CreateCar/>
     <DeleteCar/>
+    <CarLookup/>
+    <CarInsurance/>
+    <CarRepair/>
   </div>
 </template>
 
@@ -13,6 +16,10 @@ import CarList from '@/components/CarList.vue'
 import CreateCar from '@/components/CreateCar.vue'
 import DeleteCar from '@/components/DeleteCar.vue'
 
+import CarLookup from '@/views/lookup/CarLookup.vue'
+import CarInsurance from '@/views/insurance/CarInsurance.vue'
+import CarRepair from '@/views/repair/CarRepair.vue'
+
 export default {
   name: 'Test',
   components: {
@@ -20,6 +27,9 @@ export default {
     CarList,
     CreateCar,
     DeleteCar,
+    CarLookup,
+    CarInsurance,
+    CarRepair,
   }
 }
 </script>

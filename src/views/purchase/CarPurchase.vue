@@ -50,7 +50,7 @@
 
                         <!-- Pagination -->
                         <div class="pagination flex-m flex-w p-t-26">
-                            <!-- <template v-for="p in Math.ceil(totalProducts / 12)">
+                            <template v-for="p in Math.ceil(totalProducts / 12)">
                                 <button
                                 type="button"
                                 @click="changePage(p - 1)"
@@ -59,7 +59,7 @@
                                 >
                                 {{ p }}
                                 </button>
-                            </template> -->
+                            </template>
                         </div>
                     </div>
                     <!-- 상품 목록 끝 -->
@@ -72,11 +72,11 @@
 <script>
 import { mapState } from 'vuex';
 
-import BrandFilter from '@/components/purchaseFilter/BrandFilter.vue';
-import PriceFilter from '@/components/purchaseFilter/PriceFilter.vue';
-import ColorFilter from '@/components/purchaseFilter/ColorFilter.vue';
+import BrandFilter from '@/components/purchase/BrandFilter.vue';
+import PriceFilter from '@/components/purchase/PriceFilter.vue';
+import ColorFilter from '@/components/purchase/ColorFilter.vue';
 
-import ProductList from '@/components/purchaseFilter/ProductList.vue';
+import ProductList from '@/components/purchase/ProductList.vue';
 
 export default {
   computed: {

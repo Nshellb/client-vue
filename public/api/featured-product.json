@@ -1,7 +1,7 @@
 [
     {
       "id": 1,
-      "image": "https://picsum.photos/720/960/?image=476",
+      "image": "https://picsum.photos/960/720/?image=476",
       "title": "Herschel supply co 25l",
       "link": "",
       "price": 75.00,
@@ -9,7 +9,7 @@
     },
     {
       "id": 2,
-      "image": "https://picsum.photos/720/960/?image=478",
+      "image": "https://picsum.photos/960/720/?image=478",
       "title": "Denim jacket blue",
       "link": "",
       "price": 92.50,
@@ -17,7 +17,7 @@
     },
     {
       "id": 3,
-      "image": "https://picsum.photos/720/960/?image=479",
+      "image": "https://picsum.photos/960/720/?image=479",
       "title": "Coach slim easton black",
       "link": "",
       "price": 165.90,
@@ -25,7 +25,7 @@
     },
     {
       "id": 4,
-      "image": "https://picsum.photos/720/960/?image=480",
+      "image": "https://picsum.photos/960/720/?image=480",
       "title": "Frayed denim shorts",
       "link": "",
       "price": 29.50,
@@ -33,7 +33,7 @@
     },
     {
       "id": 5,
-      "image": "https://picsum.photos/720/960/?image=476",
+      "image": "https://picsum.photos/960/720/?image=476",
       "title": "Herschel supply co 25l",
       "link": "",
       "price": 75.00,
@@ -41,7 +41,7 @@
     },
     {
       "id": 6,
-      "image": "https://picsum.photos/720/960/?image=478",
+      "image": "https://picsum.photos/960/720/?image=478",
       "title": "Denim jacket blue",
       "link": "",
       "price": 92.50,
@@ -49,7 +49,7 @@
     },
     {
       "id": 7,
-      "image": "https://picsum.photos/720/960/?image=479",
+      "image": "https://picsum.photos/960/720/?image=479",
       "title": "Coach slim easton black",
       "link": "",
       "price": 165.90,
@@ -57,7 +57,7 @@
     },
     {
       "id": 8,
-      "image": "https://picsum.photos/720/960/?image=480",
+      "image": "https://picsum.photos/960/720/?image=480",
       "title": "Frayed denim shorts",
       "link": "",
       "price": 29.50,

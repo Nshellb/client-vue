@@ -1,21 +1,57 @@
-import bannerApi from '@/api/banner';
+import productApi from '@/api/product';
 
 export default {
     namespaced: true,
     state: {
-        mainBanners: [] // SlideBanner Component를 저장하는 배열
+        products: [], // 상품 목록 출력
+        totalProducts: 0,
+        bestProducts: [],
+        featuredProducts: [],
+        page: 0, // 페이지 위치
+        priceRange: null, // pricefilter
     },
     mutations: {
-        setMainBanners(state, banners) { // 값을 추가하는 mutaions 선언
-            state.mainBanners = [].concat(banners);
+        setBestProducts(state, products) {
+            state.bestProducts = [].concat(products); // 3. state에 저장하도록 만들어준다.
+        },
+        setFeaturedProducts(state, products) {
+            state.featuredProducts = [].concat(products);
+        },
+        setProducts(state, products) {
+            state.products = [].concat(products)
+        },
+        setTotalProducts(state, totalCount) {
+            state.totalProducts = totalCount;
+        },
+        setPage(state, page) {
+            state.page = page;
+        },
+        setPriceRange(state, priceRange) {
+            state.priceRange = priceRange;
         }
     },
     actions: {
-        async setMainBanners({ commit }) {
-            const response = await bannerApi.getMainSlideBanners(); // banner api 의 getMainSlideBanners를 통해 data를 가져오고
-            // await 는 async 함수 내에서만 사용할 수 있는 코드인데 async 함수를 호출한뒤 실행한 결과를 return하는 함수이다.
+        async setBestProducts({ commit }) {
+            const response = await productApi.getBestProducts(); // 1. getBestProducts를 api 에서 가져와서 
 
-            commit('setMainBanners', response.data); // setMainBanners mutation을 호출해서 값을 설정하는 코드를 추가한다.
-        }
+            commit('setBestProducts', response.data); // 2. mutation을 호출하고 
+        },
+        async setFeaturedProducts({ commit }) {
+            const response = await productApi.getFeaturedProducts(); 
+
+            commit('setFeaturedProducts', response.data); 
+        },
+        async setProducts({ commit, state }, page = 0) {
+            const response = await productApi.getProducts(page, state.priceRange); 
+
+            commit('setProducts', response.data.products);
+            commit('setTotalProducts', response.data.total);
+            commit('setPage', page);
+        },
+        async setPriceRange({ commit, dispatch }, priceRange) { // 상태값만 변경.
+            commit('setPriceRange', priceRange); // 상태값만 변경.
+
+            dispatch('setProducts'); // 기존 api 를 호출하던 setProducts action 을 호출
+        },
     },
 }
