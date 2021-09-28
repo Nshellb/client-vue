@@ -19,6 +19,8 @@
             </form>
         </div>
         <!-- create_car end -->
+        
+        <!-- 수정모드 미구현 -->
         <button id="saveCar" type="button" value="save car" class="btn btn-primary" @click="updateMode ? updateContent() : uploadContent()">저장</button>
         <button id="saveCancel" type="button" value="cancel save" class="btn btn-primary" @click="cancel">취소</button>
     </div>
@@ -62,6 +64,15 @@ export default {
             })
                 // .catch(error => {
                 //     alert(error)
+                //     if(this.car_model == null)
+                //     {
+                //         배열 += 차량 모델명;
+                //     }
+                //     if(this.car_price == null)
+                //     {
+                //         배열 += 차량 가격;
+                //     }
+                //     alert(배열 + "을 다시 입력해 주세요.");
                 // })
         },
         cancel() {
