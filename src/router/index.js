@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/views/Home.vue'
 import Lookup from '@/views/lookup/CarLookup.vue'
 import Purchase from '@/views/purchase/CarPurchase.vue'
+import CreateCar from '@/components/purchase/CreateCar.vue'
 import Insurance from '@/views/insurance/CarInsurance.vue'
 import Repair from '@/views/repair/CarRepair.vue'
 import Test from '@/views/test/CarTest.vue'
@@ -28,6 +29,11 @@ export default new Router({
       path: '/purchase',
       name: 'purchase',
       component: Purchase
+    },
+    {
+      path: '/purchase/add',
+      name: 'createcar',
+      component: CreateCar
     },
     {
       path: '/insurance',

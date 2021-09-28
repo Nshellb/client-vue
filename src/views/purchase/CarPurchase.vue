@@ -3,7 +3,7 @@
         <!-- 배너 시작 -->
         <section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" :style="'background-image: url(https://picsum.photos/1920/239/?image=526);'">
             <h2 class="l-text2 t-center">
-                차량 거래 페이지
+                차량 목록
             </h2>
             <!-- <p class="m-text13 t-center">
                 New Arrivals Women Collection 2018
@@ -35,18 +35,23 @@
                     </div>
                     <!-- 사이드바 필터 끝 -->
 
+
                     <!-- 상품 목록 시작 -->
                     <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
-                        <!--  -->
+                        <!-- 현재 페이지 상품 수 -->
                         <div class="flex-sb-m flex-w p-b-35">
                             <!-- 현재보고 있는 상품 수와 인덱스를 표시 -->
                             <span class="s-text8 p-t-5 p-b-5">
                                 Showing {{(page * 12) + 1}}–{{(page * 12) + 12}} of {{ totalProducts }} results
                             </span>
+                            <!-- 상품 추가 버튼 -->
+                            <button id="createCar" type="button" value="create car" class="btn btn-primary" @click="createCar">중고차 등록</button>
                         </div>
+
 
                         <!-- Product (상품 목록) -->
                         <ProductList />
+
 
                         <!-- Pagination -->
                         <div class="pagination flex-m flex-w p-t-26">
@@ -88,6 +93,11 @@ export default {
   methods: {
     changePage(page) {
       this.$store.dispatch('product/setProducts', page);
+    },
+    createCar() {
+        this.$router.push({
+            path: '/purchase/add'
+        })
     }
   },
   components: {
