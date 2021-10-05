@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/views/Home.vue'
 import Lookup from '@/views/lookup/CarLookup.vue'
 import Purchase from '@/views/purchase/CarPurchase.vue'
+import ProductDetail from '@/components/purchase/ProductDetail.vue'
 import CreateCar from '@/components/purchase/CreateCar.vue'
 import Insurance from '@/views/insurance/CarInsurance.vue'
 import Repair from '@/views/repair/CarRepair.vue'
@@ -34,6 +35,11 @@ export default new Router({
       path: '/purchase/add',
       name: 'createcar',
       component: CreateCar
+    },
+    {
+      path: '/purchase/detail/:productId', // detail page로 넘어갈때 parameter 값 productId 를 사용.
+      name: 'productdetail',
+      component: ProductDetail
     },
     {
       path: '/insurance',

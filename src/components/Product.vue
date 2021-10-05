@@ -23,7 +23,7 @@
 
             <div class="block2-txt p-t-20">
                 <router-link to="/" class="block2-name dis-block s-text3 p-b-5">
-                    {{ product.title }}
+                    {{ product.model }}
                 </router-link>
 
                 <span class="block2-price m-text6 p-r-5">
