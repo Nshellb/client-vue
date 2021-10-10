@@ -44,7 +44,7 @@ export default {
         async setProducts({ commit, state }, page = 0) {
             const response = await productApi.getProducts(page, state.priceRange); 
 
-            commit('setProducts', response.data);
+            commit('setProducts', response.data.products.Record);
             commit('setTotalProducts', response.data.total);
             commit('setPage', page);
             // commit('setProducts', response.data.products);
