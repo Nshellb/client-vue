@@ -45,6 +45,8 @@ export default {
             const response = await productApi.getProducts(page, state.priceRange); 
 
             commit('setProducts', response.data);
+            commit('setTotalProducts', response.data.total);
+            commit('setPage', page);
             // commit('setProducts', response.data.products);
             // commit('setTotalProducts', response.data.total);
             // commit('setPage', page);

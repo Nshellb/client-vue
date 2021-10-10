@@ -10,6 +10,8 @@ import Repair from '@/views/repair/CarRepair.vue'
 import Test from '@/views/test/CarTest.vue'
 import Shop from '@/views/Shop.vue'
 
+import GetTest from '@/components/purchase/GetTest.vue'
+
 Vue.use(Router)
 
 export default new Router({
@@ -60,6 +62,11 @@ export default new Router({
       path: '/shop',
       name: 'shop',
       component: Shop
+    },
+    {
+      path: '/gettest',
+      name: 'gettest',
+      component: GetTest
     },
   ]
 })
