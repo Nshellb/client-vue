@@ -102,6 +102,7 @@ export default {
                 console.log(data);
                 console.log("success_getallcar");
                 this.purchase_car = 'success_getallcar'; // 화면에 출력되는 부분에 저장
+                this.apiResponse = data;
             })
                 // .catch(error => { // error catch
                 //     alert(error)
