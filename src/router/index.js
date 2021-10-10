@@ -5,7 +5,7 @@ import Lookup from '@/views/lookup/CarLookup.vue'
 import Purchase from '@/views/purchase/CarPurchase.vue'
 import ProductDetail from '@/components/purchase/ProductDetail.vue'
 import CreateCar from '@/components/purchase/CreateCar.vue'
-import Insurance from '@/views/insurance/CarInsurance.vue'
+// import Insurance from '@/views/insurance/CarInsurance.vue'
 import Repair from '@/views/repair/CarRepair.vue'
 import Test from '@/views/test/CarTest.vue'
 import Shop from '@/views/Shop.vue'
@@ -41,11 +41,11 @@ export default new Router({
       name: 'productdetail',
       component: ProductDetail
     },
-    {
-      path: '/insurance',
-      name: 'insurance',
-      component: Insurance
-    },
+    // {
+    //   path: '/insurance',
+    //   name: 'insurance',
+    //   component: Insurance
+    // },
     {
       path: '/repair',
       name: 'repair',

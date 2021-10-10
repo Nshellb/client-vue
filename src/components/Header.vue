@@ -27,10 +27,6 @@
                                 <a>Purchase</a>
                             </router-link>
 
-                            <router-link :to="{name: 'insurance'}" tag="li" active-class="sale-noti" exact>
-                                <a>Insurance</a>
-                            </router-link>
-
                             <router-link :to="{name: 'repair'}" tag="li" active-class="sale-noti" exact>
                                 <a>Repair</a>
                             </router-link>
@@ -200,12 +196,6 @@
                     <li class="item-menu-mobile">
                         <router-link :to="{name: 'purchase'}" active-class="sale-noti" exact>
                             <a>Purchase</a>
-                        </router-link>
-                    </li>
-
-                    <li class="item-menu-mobile">
-                        <router-link :to="{name: 'insurance'}" active-class="sale-noti" exact>
-                            <a>Insurance</a>
                         </router-link>
                     </li>
 
