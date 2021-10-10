@@ -96,7 +96,7 @@ export default {
         },
         getAllCar() {
             this.apiResponse = null; // 받아온값이 저장되는 변수 초기화
-            axios.get('/api/getAllCar') // controller.js 의 /api/getAllCar 를 호출
+            axios.get('localhost:8000/api/products.json') // controller.js 의 /api/getAllCar 를 호출
             .then(response => { // 결과 반환 부분
                 const data = response; // 반환되는 결과중에서 data 부분만 가져옴
                 console.log(data);
