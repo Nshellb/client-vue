@@ -22,7 +22,7 @@
             </div>
 
             <div class="block2-txt p-t-20">
-                <router-link :to="{name: 'productdetail', params: {productId: product.Key}}" class="block2-name dis-block s-text3 p-b-5">
+                <router-link :to="{name: 'productdetail', params: {productId: product.Key}, props: true}" class="block2-name dis-block s-text3 p-b-5">
                     <!-- {{ product.Key }} -->
                     {{ product.Record.model }}
                 </router-link>
