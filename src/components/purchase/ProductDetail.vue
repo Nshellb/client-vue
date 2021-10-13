@@ -1,50 +1,43 @@
 <template>
     <div>
-        <div class="content-detail-content-info">
-            <!-- 글번호, 제목 -->
-            <div class="content-detail-content-info-left">
-                <div class="content-detail-content-info-left-number">
-                    {{$route.params.productId}}
-                    
+        <section class="banner bgwhite p-t-40 p-b-40">
+            <div class="container">
+                <div class="car_info">
+                    <div class="car_img">
+                        <img src="https://picsum.photos/1920/570/?image=814">
+                    </div>
+                    <div class="car_text">
+                        <h3>모델명 : {{this.apiResponse[0].model}}</h3>
+                        <h3>제조사 : {{this.apiResponse[0].maker}}</h3>
+                        <h3>가격 : {{this.apiResponse[0].price}}</h3>
+                        <h3>판매자 : {{this.apiResponse[0].walletid}}</h3>
+                        <button id="purchaseCar" type="button" value="Purchase" class="btn btn-primary" @click="isModalViewed = true">구매하기</button>
+                    </div>
                 </div>
-                <div class="content-detail-content-info-left-subject">
-                    <!-- {{model}} -->
+                <div class="car_detail">
                 </div>
+                <!-- modal start -->
+                <h1>모달 컴포넌트 만들기 :)</h1>
+                <ModalView v-if="isModalViewed" @close-modal="isModalViewed = false">
+                    <BuyCar />
+                </ModalView>
+                <!-- modal end -->
             </div>
-            <!-- 글쓴이, 등록(작성)일-->
-            <div class="content-detail-content-info-right">
-                <div class="content-detail-content-info-right-user">
-                    <!-- 글쓴이: {{sellername}} -->
-                    <!-- {{Key}} -->
-                </div>
-                <div class="content-detail-content-info-right-created">
-                    <!-- 등록일: {{maker}} -->
-                    {{ this.apiResponse[0].maker }}
-                </div>
-            </div>
-        </div>
-        <div class="content-detail-content">
-            {{ this.apiResponse }}
-            <!-- {{context}} -->
-            <!-- {{Key}} -->
-        </div>
-        <div class="content-detail-button">
-            <!-- <button variant="primary" @click="updateData">수정</button>
-            <button variant="success" @click="deleteData">삭제</button> -->
-        </div>
-        <div class="content-detail-comment">
-            <!-- <CommentList :contentId="contentId"/> -->
-        </div>
+        </section>
     </div>
 </template>
 
 <script>
 import axios from 'axios';
 
+import BuyCar from '@/components/purchase/BuyCar.vue';
+import ModalView from "@/components/purchase/ModalView.vue";
+
 export default {
     name: "ProductDetail",
     components: {
-        // CommentList,
+        BuyCar,
+        ModalView,
     },
     created () {
         console.log(1);
@@ -81,70 +74,51 @@ export default {
             });
     },
     data() {
-        // const productId = String(this.$route.params.productId); // router.js에서 가져온 carKey를 저장.
         return {
-            apiResponse: [], // HLF 에서 가져온 값 저장하는 버퍼
-            // Key: productId, // carKey - product.Key
-            // Key: productId, // 글번호
-            // model: contentData.title, // 제목
-            // sellername: contentData.context, // 내용
-            // maker: data.User.filter(item => item.user_id === contentData.user_id)[0].name, // 글쓴이
-            // created: contentData.created_at, // 작성일
+            isModalViewed: false,
         };
     },
-    // methods: {
-    //     deleteData() {
-    //         const content_index = data.Content.findIndex(item => item.content_id === this.contentId); // findIndex 조건을 만족하는 index 반환
-    //         data.Content.splice(content_index, 1)
-    //         this.$router.push({
-    //             path: '/board/free'
-    //         })
-    //     },
-    //     updateData() {
-    //         this.$router.push({
-    //             path: `/board/free/create/${this.contentId}`
-    //         })
-    //     }
-    // }
+    methods: {
+        purchaseCar() { 
+        },
+    },
 };
 </script>
 
 <style scoped>
-.content-detail-content-info {
-    border: 1px solid black;
+.car_info{
     display: flex;
     justify-content: space-between;
-}
-.content-detail-content-info-left {
-    width: 720px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-}
-.content-detail-content-info-right {
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-}
-.content-detail-content {
     border: 1px solid black;
-    margin-top: 1rem;
-    padding-top: 1rem;
-    min-height: 720px;
 }
-.content-detail-button {
+.car_info>.car_img {
+    order: 0;
+    overflow:hidden;
+    width: 600px;
+    height: 600px;
+    flex-grow: 3;
+    margin-right: 10px;
     border: 1px solid black;
-    margin-top: 1rem;
-    padding: 2rem;
 }
-.content-detail-comment {
+.car_img>img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+.car_info>.car_text {
+    order: 1;
+    height: 600px;
+    width: 500px;
+    text-align: left;
+    font-size: 15px;
+    flex-grow: 2;
+    margin-left: 10px;
+    padding: 15px;
+    position:relative;
     border: 1px solid black;
-    margin-top: 1rem;
-    padding: 2rem;
+}
+.car_text>button {
+    position: absolute; right: 0px; bottom: 0px;
+    margin: 15px;
 }
 </style>
