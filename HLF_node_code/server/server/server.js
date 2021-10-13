@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 var app = express();
 require('./controller.js')(app);
 app.use(express.static(path.join(__dirname, '../client')));
+//app.use('/go/src/used-car', require('../sdk/enrollAdmin2'));
 var port = process.env.PORT || 8000;
 app.listen(port,function(){
   console.log("Live on port: " + port);

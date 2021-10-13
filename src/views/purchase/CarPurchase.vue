@@ -42,7 +42,7 @@
                         <div class="flex-sb-m flex-w p-b-35">
                             <!-- 현재보고 있는 상품 수와 인덱스를 표시 -->
                             <span class="s-text8 p-t-5 p-b-5">
-                                Showing {{(page * 12) + 1}}–{{(page * 12) + 12}} of {{ totalProducts }} results
+                                <!-- Showing {{(page * 12) + 1}}–{{(page * 12) + 12}} of {{ totalProducts }} results -->
                             </span>
                             <!-- 상품 추가 버튼 -->
                             <button id="createCar" type="button" value="create car" class="btn btn-primary" @click="createCar">중고차 등록</button>

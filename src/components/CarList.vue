@@ -30,6 +30,8 @@
                     <th>Maker</th>
                     <th>Price</th>
                     <th>Owner</th>
+                    <th>PurchaseCount</th>
+                    <th>RepairCount</th>
                     <th>Buy</th>
                 </tr>
                 <tr v-for="(car, index) in apiResponse" :key="index">
@@ -38,6 +40,8 @@
                     <td>{{car.maker}}</td>
                     <td>{{car.price}}</td>
                     <td>{{car.walletid}}</td>
+                    <td>{{car.purchasecount}}</td>
+                    <td>{{car.repaircount}}</td>
                     <td><button class="btn btn-primary" id="purchaseCar" type="button" value="구매" @click="purchaseCar">구매</button></td>
                 </tr>
                 <!-- <tr>
@@ -82,7 +86,8 @@ export default {
                     data[i].maker = data[i].Maker;
                     data[i].price = data[i].Price;
                     data[i].walletid = data[i].WalletID;
-                    data[i].sellername = data[i].Sellername;
+                    data[i].purchasecount = data[i].PurchaseCount;
+                    data[i].repaircount = data[i].RepairCount;
                     array.push(data[i]);
                 }
                 this.apiResponse = array; // 화면에 출력되는 부분에 저장
@@ -124,8 +129,8 @@ export default {
 
             for (let i = 1; i < allCar.rows.length; i++) {
                 allCar.rows[i].cells[5].onclick = function () {
-                    selectCar = allCar.rows[i].cells[0].innerText;
-                    walletid = allCar.rows[i].cells[4].innerText;
+                    selectCar = allCar.rows[i].cells[0].innerText; // 선택한 행의 key 값
+                    walletid = allCar.rows[i].cells[4].innerText; // 선택한 행의 판매자 값
                     alert(selectCar+"와 "+walletid+"을 선택하셨습니다.");
                     axios.get('/api/purchaseCar', { // controller.js 의 /api/purchaseCar 를 호출
                         params: { // parameter 전달 구문

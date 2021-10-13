@@ -4,9 +4,11 @@
     <CarList/>
     <CreateCar/>
     <DeleteCar/>
-    <CarLookup/>
+    <GetRepair/>
+
+    <!-- <CarLookup/>
     <CarInsurance/>
-    <CarRepair/>
+    <CarRepair/> -->
   </div>
 </template>
 
@@ -15,10 +17,11 @@ import SearchWallet from '@/components/SearchWallet.vue'
 import CarList from '@/components/CarList.vue'
 import CreateCar from '@/components/CreateCar.vue'
 import DeleteCar from '@/components/DeleteCar.vue'
+import GetRepair from '@/components/GetRepair.vue'
 
-import CarLookup from '@/views/lookup/CarLookup.vue'
-import CarInsurance from '@/views/insurance/CarInsurance.vue'
-import CarRepair from '@/views/repair/CarRepair.vue'
+// import CarLookup from '@/views/lookup/CarLookup.vue'
+// import CarInsurance from '@/views/insurance/CarInsurance.vue'
+// import CarRepair from '@/views/repair/CarRepair.vue'
 
 export default {
   name: 'Test',
@@ -27,9 +30,11 @@ export default {
     CarList,
     CreateCar,
     DeleteCar,
-    CarLookup,
-    CarInsurance,
-    CarRepair,
+    GetRepair,
+
+    // CarLookup,
+    // CarInsurance,
+    // CarRepair,
   }
 }
 </script>

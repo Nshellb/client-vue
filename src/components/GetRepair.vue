@@ -36,7 +36,7 @@
                     <td>{{repair.engineer}}</td>
                     <td>{{repair.date}}</td>
                     <td>{{repair.rcar}}</td>
-                    <td>{{repair.information}}</td>
+                    <td>{{repair.informaion}}</td>
                 </tr>
                 <!-- <tr>
                     <td>TEST</td>

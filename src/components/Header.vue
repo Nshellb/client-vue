@@ -19,9 +19,9 @@
                                 <a>Home</a>
                             </router-link>
 
-                            <router-link :to="{name: 'lookup'}" tag="li" active-class="sale-noti" exact>
+                            <!-- <router-link :to="{name: 'lookup'}" tag="li" active-class="sale-noti" exact>
                                 <a>Lookup</a>
-                            </router-link>
+                            </router-link> -->
 
                             <router-link :to="{name: 'purchase'}" tag="li" active-class="sale-noti" exact>
                                 <a>Purchase</a>
@@ -187,11 +187,11 @@
                         </router-link>
                     </li>
 
-                    <li class="item-menu-mobile">
+                    <!-- <li class="item-menu-mobile">
                         <router-link :to="{name: 'lookup'}" active-class="sale-noti" exact>
                             <a>Lookup</a>
                         </router-link>
-                    </li>
+                    </li> -->
 
                     <li class="item-menu-mobile">
                         <router-link :to="{name: 'purchase'}" active-class="sale-noti" exact>
