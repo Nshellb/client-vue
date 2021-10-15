@@ -17,7 +17,6 @@
                 <div class="car_detail">
                 </div>
                 <!-- modal start -->
-                <h1>모달 컴포넌트 만들기 :)</h1>
                 <ModalView v-if="isModalViewed" @close-modal="isModalViewed = false">
                     <BuyCar />
                 </ModalView>
@@ -75,12 +74,9 @@ export default {
     },
     data() {
         return {
+            apiResponse: [],
             isModalViewed: false,
         };
-    },
-    methods: {
-        purchaseCar() { 
-        },
     },
 };
 </script>

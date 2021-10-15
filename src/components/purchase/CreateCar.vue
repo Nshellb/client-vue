@@ -13,15 +13,16 @@
                     <input class="form-control" type="text" placeholder="Ex: 20" v-model="car_price">
                     <h3>Owner: </h3>
                     <input class="form-control" type="text" placeholder="Ex: 5T6Y7U8I" v-model="car_walletid">
-                    <button id="setCar" type="button" value="Create" class="btn btn-primary" @click="setCar">Set Car</button>
-                    <h5 style="color:green;margin-bottom:2%" id="success_setcar">{{create_car}}</h5>
+                    <h3></h3>
+                    <!-- <h5 style="color:green;margin-bottom:2%" id="success_setcar">{{create_car}}</h5> -->
                 </div>
             </form>
         </div>
         <!-- create_car end -->
         
         <!-- 수정모드 미구현 -->
-        <button id="saveCar" type="button" value="save car" class="btn btn-primary" @click="updateMode ? updateContent() : uploadContent()">저장</button>
+        <button id="setCar" type="button" value="Create" class="btn btn-primary" @click="setCar">등록</button>
+        <!-- <button id="saveCar" type="button" value="save car" class="btn btn-primary" @click="updateMode ? updateContent() : uploadContent()">저장</button> -->
         <button id="saveCancel" type="button" value="cancel save" class="btn btn-primary" @click="cancel">취소</button>
     </div>
 </template>
@@ -55,12 +56,14 @@ export default {
                     sellername: this.car_walletid, // 현재는 고정값. 계정 로그인시 고쳐야함.
                 }
             }).then(response => { // 결과 반환 부분
+                alert("등록까지 1~2분 소요될 수 있습니다. 안내창을 기다려주세요.");
                 console.log("success_setcar");
                 this.create_car = 'success_setcar'; // 화면에 출력되는 부분에 저장
                 alert("상품이 등록되었습니다.");
                 this.$router.push({
                     path: '/purchase'
                 })
+                this.$router.go();
             })
                 // .catch(error => {
                 //     alert(error)

@@ -84,27 +84,27 @@ import ColorFilter from '@/components/purchase/ColorFilter.vue';
 import ProductList from '@/components/purchase/ProductList.vue';
 
 export default {
-  computed: {
-    ...mapState('product', {
-      totalProducts: state => state.totalProducts,
-      page: state => state.page,
-    })
-  },
-  methods: {
-    changePage(page) {
-      this.$store.dispatch('product/setProducts', page);
-    },
-    createCar() {
-        this.$router.push({
-            path: '/purchase/add'
+    computed: {
+        ...mapState('product', {
+        totalProducts: state => state.totalProducts,
+        page: state => state.page,
         })
+    },
+    methods: {
+        changePage(page) {
+        this.$store.dispatch('product/setProducts', page);
+        },
+        createCar() {
+            this.$router.push({
+                path: '/purchase/add'
+            })
+        }
+    },
+    components: {
+        BrandFilter,
+        PriceFilter,
+        ColorFilter,
+        ProductList,
     }
-  },
-  components: {
-    BrandFilter,
-    PriceFilter,
-    ColorFilter,
-    ProductList,
-  }
 }
 </script>

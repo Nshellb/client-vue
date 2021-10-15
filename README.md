@@ -3,6 +3,7 @@
 client/vue_app 프로젝트 생성
 > npm install -g @vue/cli
 > vue create vue_app
+manual -> babel, Router, vuex 선택 -> 모두 enter
 
 bootstrap-vue 설치
 > npm install vue bootstrap bootstrap-vue
@@ -421,7 +422,7 @@ axios.get('/api/getWallet', { // controller.js 의 /api/getWallet 를 호출
 + 입력 필드 값은 따로 data 변수를 등록할 필요가 없는듯 하다.
 
 2. 표에 받아온값을 출력 
-http://localhost:8080/api/getCar?carkey=CAR0 으로 쿼리 요청시 
+http://localhost:8000/api/getCar?carkey=CAR0 으로 쿼리 요청시 
 [{"Model":"G90", "Maker":"Genesis", "Price":"40", "WalletID":"bkw1212", "Sellername":"Byun"}]
 -> controller.js 에 선언된 인자 전달 값을 확인하고
     받아온 출력값은 app.js(angular) 에서 확인하고 이식하면 되는듯하다.
@@ -528,7 +529,7 @@ actions :
 3) 등록 이후 최신의 등록이 
 가장 맨앞으로 오도록(등록번호 높음을...) page refresh
 
-판매완료 상품 아이디어... 필요...
+판매완료 표시 상품 아이디어... 필요...
 
 과정 (설계 numbering 과 무관. 순서만 나열)
 1) CarPurchase.vue 에 차량 등록 버튼을 추가
@@ -541,9 +542,7 @@ router/index.js 에 추가.
 5) 차량 등록을 위한 입력 필드 및 저장 버튼 생성
 6) 차량 등록시 결과 반환 이후 완료 창을 띄우고 기존 페이지로 돌아감.
 (수정 기능 미이식)
-7) 
-
-저장 버튼 클릭시 트랜젝션 처리 대기 및 완료시 완료 alert 띄우고 확인시 차량 목록페이지로
+저장 버튼 클릭시 트랜젝션 처리 대기 및 완료시 완료 alert 띄우고 확인시 차량 목록페이지로 이동
 
 
 4. 상세페이지
@@ -563,6 +562,140 @@ router/index.js 에 추가.
 데이터는 임의로 만들어서 진행해보자.
 
 
+10.04.2021.
+
+기존 이어서 구현(10.11.2021. 해결)
+
+1. 판매 목록을 서버에서 가져온것으로 대체
+1) api 로 데이터를 받아오는 부분인 products.js 에 
+axios 로 getallcar 를 통해 데이터 받는 부분 구현.
+http.js 활용.
+2) 받아온 데이터를 vuex 로 사용하도록 store 에서 작업.
+3) product 에서 가져오는 값을 변경한다.
+
+
+4. 상세페이지(10.11)
+
+과정 (설계 numbering 과 무관. 순서만 나열)
+1) 상품 상세 페이지인 ProductDetail.vue 생성
+2) router/index.js 에 ProductDetail 의 router 등록 (일단은 productId라는 상품값 사용.)
+3) 상품목록 페이지에 항목들을 띄우도록 먼저 구현하지 않으면 오류 발생.
+(상품의 버튼 클릭시 /purchase/detail/:productId 의 항목에따른 값을 보여주도록)
+4) 상품 목록 구현이후 router/index.js 값과 Product.vue 의 router-link :to 의 값을 mapping 한다.
+
+CAR key 가 HLF 에 등록되는 차량에 대한 고유 구별 값이라면
+게시글에 대한 값은 또 다시 새로 부여하는 것이 필요할듯...?
+(동일 차량이 다시 판매 등록이 될수도 있으니...)
+혹은 판매중/판매중이 아님을 나타내는 값도 하나 있어야할듯하다.
+(이러면 판매되었던 이력들 확인이 곤란할듯...?)
+
+
+추가 구현
+
+계정 생성 (HLF 네트워크에 지갑등록) + 중복확인
+로그인 (입력한 id 값을 통해 체인코드로 계정의 정보를 가져옴
+-> 일단은 vuex에 모든 계정 정보를 저장하는식...?
+-> 최종적으로는 id 값만 가지고 체인코드로 데이터 값 접근하도록)
+(로그인 후 사용자 ID를 vuex 로 저장하여 사용)
+- 차량 등록 및 구매시 계정 값을 vuex 에 저장한 로그인 값으로 대체
+
+차량 등록시 등록완료 문구 확인하도록 안내
+
+차량 상세 페이지, 구매 과정, 구매 완료/실패
+
+
+
+
+
+
+10.10.2021.
+/api/products.json 받아온 결과 (8080)
+{ "data": { "products": [ { "image": "https://picsum.photos/720/960/?image=476", "title": "Herschel supply co 25l", "link": "", "price": 75, "badge": "new" }, { "image": "https://picsum.photos/720/960/?image=478", "title": "Denim jacket blue", "link": "", "price": 92.5, "badge": null }, { "image": "https://picsum.photos/720/960/?image=479", "title": "Coach slim easton black", "link": "", "price": 165.9, "badge": null }, { "image": "https://picsum.photos/720/960/?image=480", "title": "Frayed denim shorts", "link": "", "price": 29.5, "badge": "sale" }, { "image": "https://picsum.photos/720/960/?image=476", "title": "Herschel supply co 25l", "link": "", "price": 75, "badge": "new" }, { "image": "https://picsum.photos/720/960/?image=478", "title": "Denim jacket blue", "link": "", "price": 92.5, "badge": null }, { "image": "https://picsum.photos/720/960/?image=479", "title": "Coach slim easton black", "link": "", "price": 165.9, "badge": null }, { "image": "https://picsum.photos/720/960/?image=480", "title": "Frayed denim shorts", "link": "", "price": 29.5, "badge": "sale" }, { "image": "https://picsum.photos/720/960/?image=476", "title": "Herschel supply co 25l", "link": "", "price": 75, "badge": "new" }, { "image": "https://picsum.photos/720/960/?image=478", "title": "Denim jacket blue", "link": "", "price": 92.5, "badge": null }, { "image": "https://picsum.photos/720/960/?image=479", "title": "Coach slim easton black", "link": "", "price": 165.9, "badge": null }, { "image": "https://picsum.photos/720/960/?image=480", "title": "Frayed denim shorts", "link": "", "price": 29.5, "badge": "sale" } ], "total": 24 }, "status": 200, "statusText": "OK", "headers": { "accept-ranges": "bytes", "content-length": "2278", "content-type": "application/json; charset=UTF-8", "date": "Sun, 10 Oct 2021 05:37:14 GMT", "etag": "W/\"8e6-Wc0D//ScHgMgFQpbRZPpR7rmhaQ\"", "x-powered-by": "Express" }, "config": { "transitional": { "silentJSONParsing": true, "forcedJSONParsing": true, "clarifyTimeoutError": false }, "transformRequest": [ null ], "transformResponse": [ null ], "timeout": 0, "xsrfCookieName": "XSRF-TOKEN", "xsrfHeaderName": "X-XSRF-TOKEN", "maxContentLength": -1, "maxBodyLength": -1, "headers": { "Accept": "application/json, text/plain, */*" }, "method": "get", "url": "/api/products.json" }, "request": {} }
+
+/api/getAllCar 받아온 결과 (8000)
+{ "data": [ { "Key": "CAR0", "Record": { "maker": "Genesis", "model": "G90", "price": "40", "sellername": "Byun", "walletid": "bkw1212" } }, { "Key": "CAR1", "Record": { "maker": "KIA", "model": "K9", "price": "30", "sellername": "Byun", "walletid": "bkw1212" } }, { "Key": "CAR2", "Record": { "maker": "Hyundai", "model": "Sonata", "price": "20", "sellername": "Byun", "walletid": "bkw1212" } } ], "status": 200, "statusText": "OK", "headers": { "content-length": "339", "content-type": "text/html; charset=utf-8", "date": "Sun, 10 Oct 2021 05:39:49 GMT", "etag": "W/\"153-yTeJZ/VSsOMnwmgidcDSp7YyVMA\"", "x-powered-by": "Express" }, "config": { "transitional": { "silentJSONParsing": true, "forcedJSONParsing": true, "clarifyTimeoutError": false }, "transformRequest": [ null ], "transformResponse": [ null ], "timeout": 0, "xsrfCookieName": "XSRF-TOKEN", "xsrfHeaderName": "X-XSRF-TOKEN", "maxContentLength": -1, "maxBodyLength": -1, "headers": { "Accept": "application/json, text/plain, */*" }, "method": "get", "url": "/api/getAllCar" }, "request": {} }
+
+
+action -> mutation 순으로 실행이 되며
+vuex log 와 HLF node 에서 값을 호출하고 가져오는것을 확인
+(/api/http 를 활용해도 포트 변경없이 pubilc / HLF 를 구분해서 잘 가져왔다.
+브라우저에서 호출시에는 포트를 각각 반대로 쓰면 당연히 안됬는데 말이지...)
+
+
+/api/products.json
+data -> products -> 0, 1, 2, ... -> badge, image, ...
+
+/api/getAllCar
+data -> 0, 1, 2 -> Key, Record(-> maker, model, ...)
+
+
+vue extension 에서 Base State -> state -> product -> products 에서 값들 정상 확인
+
+
+
+
+
+
+10112021
+
+vuex 바인딩시 computed state 부분도 vue 구조에 맞게 가져와야 한다.
+vuex 바인딩 후 출력할 부분 값이 없어도 오류가 나지는 않는다.(img)
+
+router-link 에서 params 를 통해서 값 전달이 가능하다.
+
+상품 세부 페이지에서 productId 값 다시 가져오기.
+const productId = String(this.$route.params.productId);
+
+
+
+
+
+
+10122021
+
+api로 받아온값을 설마했는데 배열의 key 값으로 접근해야 했다. 
+{this.apiResponse[0].maker}
+
+
+v-for 에서는 이런 작업없이 잘됬던건 반복문으로 풀어냈기 때문인듯한다.
+
+
+< token error.
+public/index.html 경로지정 오류라고 한다...
+<!-- Unexpected token '<' error sol. -->
+<base href="/" />
+
+
+
+
+
+
+10152021
+
+Modal
+ProductDetail.vue 에서 [구매하기] 버튼 클릭시
+modal 로 지정한 컴포넌트인 ModalView.vue 가 보이도록 
+isModalViewed 변수를 할당.
+
+ModalView.vue 에서 보여줄 컴포넌트로는 BuyCar.vue 선택.
+
+남은 추가 구현 기능
+
+사진 업로드 - 아마... node?
+
+로그인 (접속중인 사용자)
+- 구매시 사용자 이름으로
+- 등록시 사용자 이름으로
+- 판매목록에 접속중인 사용자 상품은 등장하지 않도록
+- 접속중인 사용자의 차량 정보 불러오기 (추가)
+
+수리내역 조회 버그 수정
+
+디자인 디테일
+
+예외처리
+
+refresh 버그
 
 
 
@@ -664,6 +797,7 @@ getAllCar 함수 호출이 이루어지는 app.js 를 구동하는 상위 노드
 8. sdk.js 
 실제 HFN 와 송수신이 이루어지는 부분.
 
+
 --------- 구조도 ---------
 *. back end 서버 구동부 (node 서버 설정 값)
 music
@@ -757,10 +891,5 @@ const, let : 재선언 가능 (let은 변수에도 재할당가능)
 axios 를 활용한 서버 통신
 https://uxgjs.tistory.com/138
 
---------- 틀 ---------
-*.
-music
-
-IBM/evote
-
-used car
+Vuex 바인딩
+https://kdydesign.github.io/2019/04/06/vuejs-vuex-helper/
