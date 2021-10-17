@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <router-link :to="{name: 'home'}" tag="li" active-class="sale-noti" exact>
                     <a class="logo">
-                        <img src="images/icons/logo.png" alt="IMG-LOGO">
+                        <img src="images/icons/Logo_2.png" alt="IMG-LOGO">
                     </a>
                 </router-link>
 
@@ -105,9 +105,14 @@
         <!-- Header Mobile -->
         <div class="wrap_header_mobile">
             <!-- Logo moblie -->
-            <a href="index.html" class="logo-mobile">
-                <img src="images/icons/logo.png" alt="IMG-LOGO">
-            </a>
+            <router-link :to="{name: 'home'}" tag="li" active-class="sale-noti" exact>
+                <a class="logo-mobile">
+                    <img src="images/icons/Logo_2.png" alt="IMG-LOGO">
+                </a>
+            </router-link>
+            <!-- <a href="/" class="logo-mobile">
+                <img src="images/icons/Logo_2.png" alt="IMG-LOGO">
+            </a> -->
 
             <!-- Button show menu -->
             <div class="btn-show-menu">

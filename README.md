@@ -893,3 +893,12 @@ https://uxgjs.tistory.com/138
 
 Vuex 바인딩
 https://kdydesign.github.io/2019/04/06/vuejs-vuex-helper/
+
+
+--------- 틀 ---------
+*.
+music
+
+IBM/evote
+
+used car
