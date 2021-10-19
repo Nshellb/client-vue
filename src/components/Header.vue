@@ -45,9 +45,13 @@
 
                 <!-- Header Icon -->
                 <div class="header-icons">
-                    <a href="#" class="header-wrapicon1 dis-block">
-                        <img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
-                    </a>
+                    <router-link :to="{name: 'join'}" tag="li" active-class="sale-noti" exact>
+                        <a class="header-wrapicon1 dis-block">
+                            <img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+                            <!-- 로그인 정보 -->
+                            {{ this.wallet }}
+                        </a>
+                    </router-link>
 
                     <span class="linedivide1"></span>
 
@@ -117,10 +121,14 @@
             <!-- Button show menu -->
             <div class="btn-show-menu">
                 <!-- Header Icon mobile -->
-                <div class="header-icons-mobile">
-                    <a href="#" class="header-wrapicon1 dis-block">
-                        <img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
-                    </a>
+                <div class="header-icons-mobile ">
+                    <router-link :to="{name: 'join'}" tag="li" active-class="sale-noti" exact>
+                        <a class="header-wrapicon1 dis-block">
+                            <img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+                            <!-- 로그인 정보 -->
+                            {{ this.wallet }}
+                        </a>
+                    </router-link>
 
                     <span class="linedivide2"></span>
 
@@ -225,6 +233,11 @@
 import { mapState, mapGetters } from 'vuex';
 
 export default {
+    data() {
+        return {
+            wallet: 'Login', // != Login -> router-link 미작동 변경 / wallet name 값. 
+        };
+    },
     computed: {
         ...mapState('cart', { // 장바구니에 담긴 상품을 cartItems에 가져오고
             cartItems: state => state.items,
@@ -252,5 +265,11 @@ export default {
 /* .wrap_header, .wrap_header_mobile {
     background-color: #28467c;
 } */
+
+/* 상단바 로그인 정보 */
+.wallet_info{
+    padding-left: 8px;
+    font-size: 18px;
+}
 
 </style>

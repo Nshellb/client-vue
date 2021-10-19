@@ -699,6 +699,44 @@ refresh 버그
 
 
 
+
+
+
+10202021
+setWallet name, id 입력받고 coin 은 def 값 할당.
+setWallet 으로 계정 생성후 
+~CA 껴야될수도?~
+getWallet 으로 로그인
+로그인정보는 vuex 에 저장.
+
+
+1. 로그인 페이지 생성 
+1) GetWallet.vue 로그인 페이지 생성
+2) router/index.js 에 로그인 페이지 등록
+3) Header.vue 에 계정 아이콘 클릭시 로그인 페이지 이동.
+Header.vue 에 {{ this.wallet }} 로그인 전에는 Login / 로그인 후에는 계정이름 할당.
+Login 되었을때는 router-link 미작동 변경 & wallet name 값 출력.
+4) name + id 입력이후 로그인 버튼 클릭
+5) 로그인 이후 상단바에 name + coin 출력
+(가능하면 추후 cart 처럼 띄우기.)
+wallet 정보를 vuex 에 저장하고 가져와서 띄워주기
+
+
+1. 계정 생성 페이지 생성 
+1) SetWallet.vue 계정 생성 페이지 생성
+2) router/index.js 에 생성 페이지 등록
+3) 로그인 페이지에서 가입 버튼으로 이동하도록 설정.
+4) 입력 필드 name, id 입력받고 coin 은 def 값 할당.
+id는 중복확인.
+(생성이 안되면 dialog 띄워주는식으로 해결될듯.)
+각 입력 필드에는 설명이 있어야 할듯...?
+5) 최종으로 가입 버튼으로 회원 가입
+-> Home 페이지로 이동
+
+
++ 스크롤바 커스텀
++ vuex 로 사진 업로드 하면서 비밀번호까지 vuex 로 관리가능하면 해보자...
+
 --------- 생각 및 예제 분석 ---------
 IBM/evote 의 public 부분이 build 된 Vue 파일들이 들어가는 부분이다.
 (그런데 왜 ~/client/src/에도 vue 관련 파일이 있는가;;)

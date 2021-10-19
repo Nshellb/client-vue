@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/views/Home.vue'
+import Accounts from '@/components/wallet/SetWallet.vue'
+import Join from '@/components/wallet/GetWallet.vue'
 import Lookup from '@/views/lookup/CarLookup.vue'
 import Purchase from '@/views/purchase/CarPurchase.vue'
 import ProductDetail from '@/components/purchase/ProductDetail.vue'
@@ -22,6 +24,16 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/accounts',
+      name: 'accounts',
+      component: Accounts
+    },
+    {
+      path: '/join',
+      name: 'join',
+      component: Join
     },
     {
       path: '/lookup',
