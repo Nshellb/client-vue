@@ -1,4 +1,3 @@
-// 계정 생성
 <template>
     <div>
         <!-- set_wallet start -->
@@ -8,32 +7,39 @@
                 <div class="create_car_text">
                     <!-- name 입력 -->
                     <h3>name:</h3>
-                    <input class="form-control" type="text" placeholder="Ex: K7" v-model="car_model">
+                    <input class="form-control" type="text" placeholder="Ex: K7" v-model="user_name">
                     <!-- id 입력 (중복확인 필요) -->
                     <h3>wallet_id: </h3>
-                    <input class="form-control" type="text" placeholder="Ex: KIA" v-model="car_maker">
+                    <input class="form-control" type="text" placeholder="Ex: KIA" v-model="user_walletId">
                     <!-- 계정 생성 버튼 -->
                     <button id="setCar" type="button" value="Create" class="btn btn-primary" @click="setWallet">Set Car</button>
                 </div>
             </form>
         </div>
         <!-- set_wallet end -->
-        
-        
-        <!-- coin 입력 (def) -->
-        
-        <!-- 결과 alret (성공/실패) -->
     </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     methods: {
-        setWallet() {
-
-            // 로그인 페이지로 이동
-            this.$router.push({
-                path: '/join'
+        setWallet(user_name, user_walletId) {
+            axios.get('/api/setWallet', {
+                params: {
+                    name: this.user_name,
+                    id: this.user_walletId,
+                    coin: 100, // coin 입력 (def)
+                }
+            }).then(response => {
+                alert("다음 안내창까지 기다려주세요.");
+                console.log("Success_setWalletId");
+                alert("계정 생성에 성공했습니다."); // 결과 alret (성공/실패)
+                // 로그인 페이지로 이동
+                this.$router.push({
+                    path: '/join'
+                })
             })
         },
     },
