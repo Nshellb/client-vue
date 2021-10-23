@@ -7,10 +7,10 @@
                 <div class="create_car_text">
                     <!-- name 입력 -->
                     <h3>name:</h3>
-                    <input class="form-control" type="text" placeholder="Ex: K7" v-model="user_name">
+                    <input class="form-control" type="text" placeholder="Ex: beak_gw" v-model="user_name">
                     <!-- id 입력 (중복확인 필요) -->
                     <h3>wallet_id: </h3>
-                    <input class="form-control" type="text" placeholder="Ex: KIA" v-model="user_walletId">
+                    <input class="form-control" type="text" placeholder="Ex: bgw1212" v-model="user_walletId">
                     <!-- 계정 생성 버튼 -->
                     <button id="setCar" type="button" value="Create" class="btn btn-primary" @click="setWallet">Set Car</button>
                 </div>

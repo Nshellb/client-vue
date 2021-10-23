@@ -11,9 +11,6 @@
                     <input class="form-control" type="text" placeholder="Ex: KIA" v-model="car_maker">
                     <h3>Price: </h3>
                     <input class="form-control" type="text" placeholder="Ex: 20" v-model="car_price">
-                    <h3>Owner: </h3>
-                    <input class="form-control" type="text" placeholder="Ex: 5T6Y7U8I" v-model="car_walletid">
-                    <h3></h3>
                     <!-- <h5 style="color:green;margin-bottom:2%" id="success_setcar">{{create_car}}</h5> -->
                 </div>
             </form>
@@ -29,6 +26,7 @@
 
 <script>
 import axios from 'axios';
+import { mapState } from 'vuex';
 
 export default {
     data() {
@@ -36,6 +34,11 @@ export default {
             create_car: '', // 반환 값
             updateMode: this.$route.params.contentId > 0 ? true : false, // update 상태인지 확인하기 위한 변수
         };
+    },
+    computed: {
+        ...mapState({ // 사용자 정보 가져오기
+            user_info: 'user_info', // 사용자 정보 가져오기
+        }),
     },
     // async created() {
     //     if (this.$route.params.contentId > 0) { // 게시글 번호가 감지되는 경우
@@ -52,8 +55,8 @@ export default {
                     model: this.car_model,
                     maker: this.car_maker,
                     price: this.car_price,
-                    walletid: this.car_walletid, // Owner...?? 고쳐야할수도...?
-                    sellername: this.car_walletid, // 현재는 고정값. 계정 로그인시 고쳐야함.
+                    walletid: this.user_info[0].id, // vuex 에서 로그인한 사용자 정보를 가져옴
+                    sellername: this.user_info[0].id, // vuex 에서 로그인한 사용자 정보를 가져옴
                 }
             }).then(response => { // 결과 반환 부분
                 alert("등록까지 1~2분 소요될 수 있습니다. 안내창을 기다려주세요.");

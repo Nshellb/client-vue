@@ -26,6 +26,7 @@
 
 <script>
 import axios from 'axios';
+import { mapState } from 'vuex';
 
 export default {
     data() {
@@ -35,6 +36,11 @@ export default {
             product_carkey: '',
             product_walletid: '',
         };
+    },
+    computed: {
+        ...mapState({ // 사용자 정보 가져오기
+            user_info: 'user_info', // 사용자 정보 가져오기
+        }),
     },
     created () {
         console.log(1);
@@ -84,7 +90,7 @@ export default {
             
             axios.get('/api/purchaseCar', { // controller.js 의 /api/purchaseCar 를 호출
                 params: { // parameter 전달 구문
-                    walletid: 'lmj1212', // 구매자
+                    walletid: this.user_info[0].id, // 구매자
                     walletid_1: this.product_walletid, // 판매자
                     carkey: this.product_carkey,
                 }
