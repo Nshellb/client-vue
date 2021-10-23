@@ -26,6 +26,7 @@ import axios from 'axios'
 export default {
     methods: {
         setWallet(user_name, user_walletId) {
+            alert("다음 안내창까지 기다려주세요.");
             axios.get('/api/setWallet', {
                 params: {
                     name: this.user_name,
@@ -33,7 +34,6 @@ export default {
                     coin: 100, // coin 입력 (def)
                 }
             }).then(response => {
-                alert("다음 안내창까지 기다려주세요.");
                 console.log("Success_setWalletId");
                 alert("계정 생성에 성공했습니다."); // 결과 alret (성공/실패)
                 // 로그인 페이지로 이동

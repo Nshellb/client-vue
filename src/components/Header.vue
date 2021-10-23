@@ -34,10 +34,6 @@
                             <router-link :to="{name: 'test'}" tag="li" active-class="sale-noti" exact>
                                 <a>Test</a>
                             </router-link>
-
-                            <router-link :to="{name: 'shop'}" tag="li" active-class="sale-noti" exact>
-                                <a>Shop</a>
-                            </router-link>
                             <!-- 현재 페이지에 따라서 링크를 받아오고 표시를 하는 구문 끝 -->
                         </ul>
                     </nav>
@@ -49,7 +45,7 @@
                         <a class="header-wrapicon1 dis-block">
                             <img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
                             <!-- 로그인 정보 -->
-                            {{ this.wallet }}
+                            {{ this.header_user_info }}
                         </a>
                     </router-link>
 
@@ -126,7 +122,7 @@
                         <a class="header-wrapicon1 dis-block">
                             <img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
                             <!-- 로그인 정보 -->
-                            {{ this.wallet }}
+                            {{ this.header_user_info }}
                         </a>
                     </router-link>
 
@@ -235,17 +231,46 @@ import { mapState, mapGetters } from 'vuex';
 export default {
     data() {
         return {
-            wallet: 'Login', // != Login -> router-link 미작동 변경 / wallet name 값. 
         };
     },
     computed: {
         ...mapState('cart', { // 장바구니에 담긴 상품을 cartItems에 가져오고
             cartItems: state => state.items,
         }),
+        ...mapState({ // 사용자 정보 가져오기
+            user_info: 'user_info', // 사용자 정보 가져오기
+            header_user_info: 'header_user_info', // Header 에 표시할 로그인 여부
+        }),
         ...mapGetters('cart', { // 장바구니에 담긴 상품의 총 금액을 계산한 결과를 totalCartPrice에 저장한다.
             totalCartPrice: 'totalPrice',
             totalCartQty: 'totalQty',
         }),
+        // headerUserInfo() {
+        //     if (this.wallet == 'Login') {
+        //         if (this.user_info[0].name != null){
+        //             this.wallet = this.user_info[0].name;
+        //         }
+        //     }
+        // }
+    },
+    methods: {
+        test() {
+            // console.log(this.wallet);
+            console.log(this.user_info[0].name);
+            console.log(this.header_user_info);
+            // if (this.wallet == 'Login') {
+            //     if (this.user_info[0].name != null){
+            //         this.wallet = this.user_info[0].name;
+            //     }
+            // }
+            // console.log(this.wallet);
+            // console.log(this.user_info[0].name);
+        },
+        logout() {
+            this.$store.dispatch('user_login_N', 'login');
+            this.$store.dispatch('user_login_I', null); 
+            this.$store.dispatch('user_login_T', null); 
+        }
     }
     
 }

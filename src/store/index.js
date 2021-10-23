@@ -12,6 +12,7 @@ export default new Vuex.Store({
     cart,
   },
   state: {
+    header_user_info: 'Login',
     user_info: [ // 로그인 정보 저장 위치
       {
         name: null,
@@ -23,16 +24,17 @@ export default new Vuex.Store({
   mutations: {
     // login start
     user_login_N(state, user_name) {
-      state.user_info.name = user_name;
-      console.log(state.user_info.name);
+      state.user_info[0].name = user_name;
+      state.header_user_info = user_name;
+      console.log(state.user_info[0].name);
     },
     user_login_I(state, user_id) {
-      state.user_info.id = user_id;
-      console.log(state.user_info.id);
+      state.user_info[0].id = user_id;
+      console.log(state.user_info[0].id);
     },
     user_login_T(state, user_token) {
-      state.user_info.token = user_token;
-      console.log(state.user_info.token);
+      state.user_info[0].token = user_token;
+      console.log(state.user_info[0].token);
     },
     // login end
   },

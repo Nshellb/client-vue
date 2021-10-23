@@ -54,7 +54,7 @@
 
 
                         <!-- Pagination -->
-                        <div class="pagination flex-m flex-w p-t-26">
+                        <!-- <div class="pagination flex-m flex-w p-t-26">
                             <template v-for="p in Math.ceil(totalProducts / 12)">
                                 <button
                                 type="button"
@@ -65,7 +65,7 @@
                                 {{ p }}
                                 </button>
                             </template>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- 상품 목록 끝 -->
                 </div>

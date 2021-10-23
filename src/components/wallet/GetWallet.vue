@@ -62,6 +62,8 @@ export default {
                         path: '/'
                     })
 
+                    // this.$router.go();
+
                     alert(data[0].Name + "님 환영합니다.");
 
                     // console.log(data[0].Name); // api 결과 중에서 이름 가져옴.
