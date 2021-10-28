@@ -1,13 +1,13 @@
 <template>
-    <div class="row">
+    <div>
         <template v-for="product in products">
-            <div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
+            <div>
                 <Product :product="product" />
             </div>
-            </template>
-        </div>
-    </template>
+        </template>
+    </div>
 </template>
+
 <script>
 import { mapState } from 'vuex';
 

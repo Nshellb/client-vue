@@ -9,8 +9,13 @@
                     <h3>name:</h3>
                     <input class="form-control" type="text" placeholder="Ex: beak_gw" v-model="user_name">
                     <!-- id 입력 (중복확인 필요) -->
-                    <h3>wallet_id: </h3>
-                    <input class="form-control" type="text" placeholder="Ex: bgw1212" v-model="user_walletId">
+                    <h3>id: </h3>
+                    <input class="form-control" type="text" placeholder="Ex: bgw1212" v-model="user_id">
+                    <!-- password 입력 -->
+                    <h3>password: </h3>
+                    <input class="form-control" type="text" placeholder="Ex: 비밀번호 입력" v-model="user_password">
+                    <h3>password check: </h3>
+                    <input class="form-control" type="text" placeholder="Ex: 비밀번호 확인 입력" v-model="user_password_check">
                     <!-- 계정 생성 버튼 -->
                     <button id="setCar" type="button" value="Create" class="btn btn-primary" @click="setWallet">Set Car</button>
                 </div>
@@ -24,23 +29,48 @@
 import axios from 'axios'
 
 export default {
+    data() {
+        return {
+            user_name: '',
+            user_id: '',
+            user_password: '',
+            user_password_check: '',
+        };
+    },
     methods: {
-        setWallet(user_name, user_walletId) {
+        setWallet(user_name, user_id, user_password, user_password_check) {
             alert("다음 안내창까지 기다려주세요.");
-            axios.get('/api/setWallet', {
-                params: {
-                    name: this.user_name,
-                    id: this.user_walletId,
-                    coin: 100, // coin 입력 (def)
-                }
-            }).then(response => {
-                console.log("Success_setWalletId");
-                alert("계정 생성에 성공했습니다."); // 결과 alret (성공/실패)
-                // 로그인 페이지로 이동
-                this.$router.push({
-                    path: '/join'
+
+            console.log(this.user_name);
+            console.log(this.user_id);
+            console.log(this.user_password);
+            console.log(this.user_password_check);
+
+            if (this.user_password != this.user_password_check) // 비밀번호 오류시
+            {
+                alert("입력한 비밀번호를 다시 확인해주세요.");
+            } else { // 비밀번호 일치시
+                axios.get('/api/createUser', {
+                    params: {
+                        name: this.user_name,
+                        id: this.user_id,
+                        password: this.user_password, 
+                        coin: 0, // coin 입력 (def)
+                        repairathority : 0, // 수리 권한 X
+                    }
+                }).then(response => { // response 성공, 실패에 따라 alert 출력 다르게
+                    console.log(response);
+                    const { data } = response;
+                    console.log(data);
+                    
+                    console.log(response);
+                    alert("계정 생성에 성공했습니다."); // 결과 alret (성공/실패)
+                    // 로그인 페이지로 이동
+                    this.$router.push({
+                        path: '/join'
+                    })
                 })
-            })
+            }
         },
     },
 }

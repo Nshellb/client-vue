@@ -16,23 +16,15 @@
                         <ul class="main_menu">
                             <!-- 현재 페이지에 따라서 링크를 받아오고 표시를 하는 구문 시작 -->
                             <router-link :to="{name: 'home'}" tag="li" active-class="sale-noti" exact>
-                                <a>Home</a>
+                                <a>메인</a>
                             </router-link>
 
-                            <!-- <router-link :to="{name: 'lookup'}" tag="li" active-class="sale-noti" exact>
-                                <a>Lookup</a>
-                            </router-link> -->
-
                             <router-link :to="{name: 'purchase'}" tag="li" active-class="sale-noti" exact>
-                                <a>Purchase</a>
+                                <a>차량 구매/판매</a>
                             </router-link>
 
                             <router-link :to="{name: 'repair'}" tag="li" active-class="sale-noti" exact>
-                                <a>Repair</a>
-                            </router-link>
-
-                            <router-link :to="{name: 'test'}" tag="li" active-class="sale-noti" exact>
-                                <a>Test</a>
+                                <a>수리</a>
                             </router-link>
                             <!-- 현재 페이지에 따라서 링크를 받아오고 표시를 하는 구문 끝 -->
                         </ul>
@@ -45,14 +37,14 @@
                         <a class="header-wrapicon1 dis-block">
                             <img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
                             <!-- 로그인 정보 -->
-                            {{ this.header_user_info }}
+                            <span class="header_user_info"> {{ this.header_user_info }} </span>
                         </a>
                     </router-link>
 
                     <span class="linedivide1"></span>
 
                     <div class="header-wrapicon2">
-                        <img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+                        <img src="images/icons/star.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
                         <span class="header-icons-noti">{{ totalCartQty }}</span>
 
                         <!-- Header cart noti -->
@@ -110,9 +102,6 @@
                     <img src="images/icons/Logo_2.png" alt="IMG-LOGO">
                 </a>
             </router-link>
-            <!-- <a href="/" class="logo-mobile">
-                <img src="images/icons/Logo_2.png" alt="IMG-LOGO">
-            </a> -->
 
             <!-- Button show menu -->
             <div class="btn-show-menu">
@@ -196,12 +185,6 @@
                         </router-link>
                     </li>
 
-                    <!-- <li class="item-menu-mobile">
-                        <router-link :to="{name: 'lookup'}" active-class="sale-noti" exact>
-                            <a>Lookup</a>
-                        </router-link>
-                    </li> -->
-
                     <li class="item-menu-mobile">
                         <router-link :to="{name: 'purchase'}" active-class="sale-noti" exact>
                             <a>Purchase</a>
@@ -254,6 +237,7 @@ export default {
         // }
     },
     methods: {
+        // test code start
         test() {
             // console.log(this.wallet);
             console.log(this.user_info[0].name);
@@ -266,10 +250,12 @@ export default {
             // console.log(this.wallet);
             // console.log(this.user_info[0].name);
         },
+        // test code end
         logout() {
             this.$store.dispatch('user_login_N', 'login');
             this.$store.dispatch('user_login_I', null); 
             this.$store.dispatch('user_login_T', null); 
+            this.$store.dispatch('user_login_R', null); 
         }
     }
     
@@ -277,12 +263,6 @@ export default {
 </script>
 
 <style>
-/* .logo {
-    font-size: 25px;
-    font-weight: bold;
-    color: white;
-} */
-
 /* 상단바 스타일 */
 .header1 {
     height: 78px;
@@ -292,9 +272,17 @@ export default {
 } */
 
 /* 상단바 로그인 정보 */
-.wallet_info{
+.header_user_info{
+    font-family: Nanum Gothic;
     padding-left: 8px;
-    font-size: 18px;
+    font-size: 16px;
+}
+
+.main_menu > li > a {
+    font-family: Nanum Gothic;
+    font-weight: bold;
+    font-size: 19px;
+    padding: 0;
 }
 
 </style>

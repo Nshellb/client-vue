@@ -5,14 +5,14 @@
             <form>
                 <h1>로그인</h1>
                 <div class="create_car_text">
-                    <!-- name 입력 -->
-                    <h3>name:</h3>
-                    <input class="form-control" type="text" placeholder="Ex: beak_gw" v-model="user_name">
                     <!-- id 입력 -->
-                    <h3>wallet_id: </h3>
-                    <input class="form-control" type="text" placeholder="Ex: bgw1212" v-model="user_walletId">
+                    <h3>id: </h3>
+                    <input class="form-control" type="text" placeholder="Ex: bgw1212" v-model="user_id">
+                    <!-- password 입력 -->
+                    <h3>password: </h3>
+                    <input class="form-control" type="text" placeholder="Ex: 비밀번호 입력" v-model="user_password">
                     <!-- 로그인 버튼 -->
-                    <button id="setCar" type="button" value="Create" class="btn btn-primary" @click="getWallet">로그인</button>
+                    <button id="setCar" type="button" value="Create" class="btn btn-primary" @click="userlogin">로그인</button>
                     <!-- 계정 생성 버튼 -->
                     <button id="setCar" type="button" value="Create" class="btn btn-primary" @click="go_setWallet">회원가입</button>
                 </div>
@@ -29,8 +29,8 @@ import { mapState } from 'vuex';
 export default {
     data() {
         return {
-            user_walletId: '',
-            user_name: '',
+            user_id: '',
+            user_password: '',
         };
     },
     computed: {
@@ -42,33 +42,45 @@ export default {
         console.log(this.$store); // store 연결확인.
     },
     methods: {
-        getWallet() {
-            axios.get('/api/getWallet', {
+        userlogin() {
+            alert("다음 안내창까지 기다려주세요.");
+
+            axios.get('/api/login', {
                 params: {
-                    walletid: this.user_walletId,
+                    userid: this.user_id,
+                    password: this.user_password,
                 }
             }).then(response => {
-                alert("다음 안내창까지 기다려주세요.");
-                const { data } = response; // 배열형태로 반환
+                console.log(response);
+                const { data } = response;
+                console.log(data);
+                
+                if (data === "success") { // 로그인 성공시
+                    console.log("사용자 계정 확인 성공!");
+                    
+                    axios.get('/api/getWallet', { // 로그인한 계정의 getWallet 결과를 vuex 에 저장.
+                        params: {
+                            id: this.user_id,
+                        }
+                    }).then(response => {
+                        console.log(response);
+                        const { data } = response;
+                        console.log(data);
+                        console.log("로그인한 사용자 정보 가져오기 성공!");
 
-                if (this.user_name == data[0].Name) {
-                    // vuex 에 사용자 정보 저장
-                    this.$store.dispatch('user_login_N', data[0].Name); 
-                    this.$store.dispatch('user_login_I', data[0].ID); 
-                    this.$store.dispatch('user_login_T', data[0].Token); 
+                        // vuex 에 사용자 정보 저장
+                        this.$store.dispatch('user_login_N', data[0].Name); 
+                        this.$store.dispatch('user_login_I', data[0].ID); 
+                        this.$store.dispatch('user_login_T', data[0].Token); 
+                        this.$store.dispatch('user_login_R', data[0].RepairAthority); 
 
-                    // 메인 페이지로 이동
-                    this.$router.push({
-                        path: '/'
+                        // 메인 페이지로 이동
+                        this.$router.push({
+                            path: '/'
+                        })
+
+                        alert(data[0].Name + "님 환영합니다.");
                     })
-
-                    // this.$router.go();
-
-                    alert(data[0].Name + "님 환영합니다.");
-
-                    // console.log(data[0].Name); // api 결과 중에서 이름 가져옴.
-                    // console.log(data[0].ID);
-                    // console.log(data[0].Token);
                 } else {
                     alert("입력된 정보가 일치하지 않습니다. 다시 확인해 주세요.");
                 }

@@ -1,52 +1,36 @@
 <template>
     <div>
-        <!-- 배너 시작 -->
-        <section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" :style="'background-image: url(https://picsum.photos/1920/239/?image=526);'">
-            <h2 class="l-text2 t-center">
-                차량 목록
-            </h2>
-            <!-- <p class="m-text13 t-center">
-                New Arrivals Women Collection 2018
-            </p> -->
-        </section>
-        <!-- 배너 끝 -->
-
         <section class="bgwhite p-t-55 p-b-65">
             <div class="container">
                 <div class="row">
-                    <!-- 사이드바 필터 시작 -->
-                    <div class="col-sm-6 col-md-4 col-lg-3 p-b-50" style="text-align: left;">
+                    <!-- side bar start -->
+                    <div class="col-md-3 col-lg-2 p-b-50" style="text-align: left;">
                         <div class="leftbar p-r-20 p-r-0-sm">
-                            <h4 class="m-text14 p-b-32">
-                                Filters
+                            <h4 class="menu-title bor-bo" style="text-align: left;">
+                                검색 필터
                             </h4>
 
-                            <!-- 사이드바 필터 - 브랜드 -->
-                            <BrandFilter />
+                            <!-- Side bar Filter -->
+                            <CountryFilter />
+                            <SegmentFilter />
+                            <ManufacturerFilter />
+                            <ModelFilter />
+                            <ModelDetailGenFilter />
 
-                            <!-- 사이드바 필터 - 가격대 -->
-                            <PriceFilter />
-                            
-                            <!-- <ColorFilter /> -->
-
-                            <!-- 사이드바 필터 - 차량 카테고리 -->
-                            <!-- 세단, SUV... -->
                         </div>
                     </div>
-                    <!-- 사이드바 필터 끝 -->
+                    <!-- side bar end -->
 
 
                     <!-- 상품 목록 시작 -->
-                    <div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
-                        <!-- 현재 페이지 상품 수 -->
-                        <div class="flex-sb-m flex-w p-b-35">
-                            <!-- 현재보고 있는 상품 수와 인덱스를 표시 -->
-                            <span class="s-text8 p-t-5 p-b-5">
-                                <!-- Showing {{(page * 12) + 1}}–{{(page * 12) + 12}} of {{ totalProducts }} results -->
-                            </span>
+                    <div class="col-md-9 col-lg-10 p-b-50">
+                        <!-- 메인 상단바 -->
+                        <h4 class="menu-title bor-bo" style="text-align: left; padding-left: 15px">
+                            차량목록
+
                             <!-- 상품 추가 버튼 -->
-                            <button id="createCar" type="button" value="create car" class="btn btn-primary" @click="createCar">중고차 등록</button>
-                        </div>
+                            <button id="createCar" type="button" value="create car" class="btnCreateCar" @click="createCar">중고차 등록</button>
+                        </h4>
 
 
                         <!-- Product (상품 목록) -->
@@ -77,22 +61,24 @@
 <script>
 import { mapState } from 'vuex';
 
-import BrandFilter from '@/components/purchase/BrandFilter.vue';
-import PriceFilter from '@/components/purchase/PriceFilter.vue';
-import ColorFilter from '@/components/purchase/ColorFilter.vue';
+import CountryFilter from '@/components/purchase/filter/CountryFilter.vue'
+import SegmentFilter from '@/components/purchase/filter/SegmentFilter.vue'
+import ManufacturerFilter from '@/components/purchase/filter/ManufacturerFilter.vue'
+import ModelFilter from '@/components/purchase/filter/ModelFilter.vue'
+import ModelDetailGenFilter from '@/components/purchase/filter/ModelDetailGenFilter.vue'
 
 import ProductList from '@/components/purchase/ProductList.vue';
 
 export default {
     computed: {
         ...mapState('product', {
-        totalProducts: state => state.totalProducts,
-        page: state => state.page,
+            totalProducts: state => state.totalProducts,
+            page: state => state.page,
         })
     },
     methods: {
         changePage(page) {
-        this.$store.dispatch('product/setProducts', page);
+            this.$store.dispatch('product/setProducts', page);
         },
         createCar() {
             this.$router.push({
@@ -101,10 +87,49 @@ export default {
         }
     },
     components: {
-        BrandFilter,
-        PriceFilter,
-        ColorFilter,
+        CountryFilter,
+        SegmentFilter,
+        ManufacturerFilter,
+        ModelFilter,
+        ModelDetailGenFilter,
+
         ProductList,
     }
 }
 </script>
+
+<style>
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+.container{
+    max-width: 1650px;
+}
+
+.menu-title {
+    font-family: Nanum Gothic;
+    font-weight: bold;
+    font-size: 23px;
+    color: #1f1f1f;
+    line-height: 1.5;
+    padding-bottom: 20px;
+}
+
+.bor-bo {
+    border-bottom: 1.8px solid #e1e1e1;
+}
+
+.btnCreateCar {
+    font-family: Nanum Gothic;
+    font-weight: bold;
+    font-size: 18px;
+    float: right;
+    margin: 0;
+    border-radius: 6px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-right: 10px;
+    padding-left: 10px;
+    background-color: #e65540;
+    color: #ffffff;
+}
+</style>

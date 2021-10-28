@@ -18,6 +18,7 @@ export default new Vuex.Store({
         name: null,
         id: null,
         token: null,
+        repairatho: null,
       },
     ]
   },
@@ -36,6 +37,10 @@ export default new Vuex.Store({
       state.user_info[0].token = user_token;
       console.log(state.user_info[0].token);
     },
+    user_login_R(state, user_repairatho) {
+      state.user_info[0].repairatho = user_repairatho;
+      console.log(state.user_info[0].repairatho);
+    },
     // login end
   },
   actions: {
@@ -48,6 +53,9 @@ export default new Vuex.Store({
     },
     user_login_T(context, user_token) {
       context.commit('user_login_T', user_token);
+    },
+    user_login_R(context, user_repairatho) {
+      context.commit('user_login_R', user_repairatho);
     },
     // login end
   },
