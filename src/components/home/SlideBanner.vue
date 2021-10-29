@@ -3,13 +3,13 @@
         <div class="wrap-slick1">
             <div class="slick1" ref="slick">
                 <template v-for="banner in banners">
-                    <div class="item-slick1 item1-slick1" :style="`background-image: url(${banner.image});`">
+                    <div class="item-slick1 item1-slick1" :style="`background-image: url(${banner.thumbnail});`">
                         <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
-                            <span class="caption1-slide1 m-text1 t-center animated visible-false m-b-15" data-appear="fadeInDown">
-                                {{ banner.subtitle }}
+                            <span class="yealDetail_text caption1-slide1 t-center animated visible-false m-b-15" data-appear="fadeInDown">
+                                {{ banner.yearDetail }}
                             </span>
 
-                            <h2 class="caption2-slide1 xl-text1 t-center animated visible-false m-b-37" data-appear="fadeInUp">
+                            <h2 class="title_text caption2-slide1 t-center animated visible-false m-b-37" data-appear="fadeInUp">
                                 {{ banner.title }}
                             </h2>
 
@@ -47,3 +47,25 @@ export default {
     },
 }
 </script>
+
+<style>
+.yealDetail_text {
+    font-family: Nanum Gothic;
+    font-weight: bold;
+	font-size: 18px;
+	color: white;
+	line-height: 1.5;
+	letter-spacing: 2px;
+}
+
+.title_text {
+    font-family: Nanum Gothic;
+    font-weight: bold;
+	font-size: 60px;
+	color: white;
+	line-height: 1.2;
+	letter-spacing: 3px;
+	text-transform: uppercase;
+}
+
+</style>

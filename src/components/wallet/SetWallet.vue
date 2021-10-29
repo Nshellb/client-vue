@@ -1,27 +1,38 @@
 <template>
     <div>
-        <!-- set_wallet start -->
-        <div class="create_car">
-            <form>
-                <h1>계정 생성</h1>
-                <div class="create_car_text">
-                    <!-- name 입력 -->
-                    <h3>name:</h3>
-                    <input class="form-control" type="text" placeholder="Ex: beak_gw" v-model="user_name">
-                    <!-- id 입력 (중복확인 필요) -->
-                    <h3>id: </h3>
-                    <input class="form-control" type="text" placeholder="Ex: bgw1212" v-model="user_id">
-                    <!-- password 입력 -->
-                    <h3>password: </h3>
-                    <input class="form-control" type="text" placeholder="Ex: 비밀번호 입력" v-model="user_password">
-                    <h3>password check: </h3>
-                    <input class="form-control" type="text" placeholder="Ex: 비밀번호 확인 입력" v-model="user_password_check">
-                    <!-- 계정 생성 버튼 -->
-                    <button id="setCar" type="button" value="Create" class="btn btn-primary" @click="setWallet">Set Car</button>
-                </div>
-            </form>
+        <div class="container">
+            <!-- set_wallet start -->
+            <div class="create_car">
+                <form>
+                    <h1>계정 생성</h1>
+                    <div class="create_car_text">
+                        <!-- name 입력 -->
+                        <div>
+                            <span>name:</span>
+                            <input class="inputId" type="text" placeholder="Ex: 이명재" v-model="user_name">
+                        </div>
+                        <!-- id 입력 (중복확인 필요) -->
+                        <div>
+                            <span>id: </span>
+                            <input ype="text" placeholder="Ex: lmj1212" v-model="user_id">
+                        </div>
+                        <!-- password 입력 -->
+                        <div>
+                            <span>password: </span>
+                            <input type="password" placeholder="Ex: 비밀번호 입력" v-model="user_password">
+                        </div>
+                        <!-- password 입력 -->
+                        <div>
+                            <span>password check: </span>
+                            <input type="password" placeholder="Ex: 비밀번호 재입력" v-model="user_password_check">
+                        </div>
+                        <!-- 계정 생성 버튼 -->
+                        <button id="setCar" type="button" value="Create" class="btn btn-primary" @click="setWallet">Set Car</button>
+                    </div>
+                </form>
+            </div>
+            <!-- set_wallet end -->
         </div>
-        <!-- set_wallet end -->
     </div>
 </template>
 

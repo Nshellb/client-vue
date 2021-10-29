@@ -41,6 +41,7 @@
                         </a>
                     </router-link>
 
+
                     <span class="linedivide1"></span>
 
                     <div class="header-wrapicon2">
@@ -118,7 +119,7 @@
                     <span class="linedivide2"></span>
 
                     <div class="header-wrapicon2">
-                        <img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+                        <img src="images/icons/star.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
                         <span class="header-icons-noti">{{ totalCartQty }}</span>
 
                         <!-- Header cart noti -->

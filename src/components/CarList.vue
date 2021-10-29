@@ -111,7 +111,7 @@ export default {
                     data[i].Record.Key = data[i].Key;
                     array.push(data[i].Record);
                 }
-                array.sort(function(a, b) {
+                array.sort(function(b, a) {
                     return parseFloat(a.Key) - parseFloat(b.Key);
                 });
                 this.apiResponse = array; // 화면에 출력되는 부분에 저장

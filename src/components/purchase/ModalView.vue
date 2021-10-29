@@ -1,6 +1,7 @@
 <template>
   <div class="modal_custom">
-    <div class="overlay_custom" @click="$emit('close-modal')"></div>
+    <div class="overlay_custom"></div>
+    <!-- <div class="overlay_custom" @click="$emit('close-modal')"></div> -->
     <div class="modal_custom-card">
       <slot />
     </div>
@@ -29,7 +30,7 @@ export default {};
   position: relative;
   max-width: 80%;
   margin: auto;
-  margin-top: 30px;
+  margin-top: 180px;
   padding: 20px;
   background-color: white;
   min-height: 500px;

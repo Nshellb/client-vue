@@ -1,7 +1,7 @@
 <template>
     <div>
         <section class="bgwhite p-t-55 p-b-65">
-            <div class="container">
+            <div class="container" style="max-width: 1650px;">
                 <div class="row">
                     <!-- side bar start -->
                     <div class="col-md-3 col-lg-2 p-b-50" style="text-align: left;">
@@ -100,10 +100,6 @@ export default {
 
 <style>
 @import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css);
-
-.container{
-    max-width: 1650px;
-}
 
 .menu-title {
     font-family: Nanum Gothic;

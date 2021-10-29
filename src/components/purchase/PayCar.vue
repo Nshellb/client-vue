@@ -2,41 +2,46 @@
     <div>
         <section class="banner bgwhite p-t-40 p-b-40">
             <div class="container">
-                <div class="car_info">
-                    <div class="car_img">
-                        <img class="car_img" :src="this.apiResponse[0].thumbnail" alt="IMG-PRODUCT">
-                    </div>
-                    <div class="car_text">
-                        <div class="car_title_d">{{this.apiResponse[0].title}}</div>
-
-                        <div class="car_price_box_d">
-                            <span class="car_price_d">{{ this.carPrice }}</span>
-                            <span class="car_price_unit_d"> 만원</span>
+                <!-- addressAndpay_car start -->
+                <div class="addressAndpay_car">
+                    <form>
+                        <!-- 주소 -->
+                        <h1>구매 진행</h1>
+                        <div class="address_text">
+                            <span>주소:</span>
+                            <input type="text" placeholder="Ex: 대전광역시 동서대로 125 한밭대학교 N4동" v-model="shipping_address">
                         </div>
 
-                        <div class="car_desc">
-                            <div class="car_desc_sub_d">연식 : {{ this.apiResponse[0].yeardetail }}</div>
-                            <div class="car_desc_sub_d">색상 : {{ this.apiResponse[0].color }}</div>
-                            <div class="car_desc_sub_d">주행거리 : {{ this.carDistancedriven }}km</div>
-                            <div class="car_desc_sub_d">연료 : {{ this.apiResponse[0].fuel }}</div>
-                            <div class="car_desc_sub_d">변속기 : {{ this.apiResponse[0].gearbox }}</div>
-                            <div class="car_desc_sub_d">차종 : {{ this.apiResponse[0].cartype }}</div>
-                            <div class="car_desc_sub_d">지역 : {{ this.apiResponse[0].region }}</div>
-                            <div class="car_desc_sub_d">판매자 : {{ this.apiResponse[0].WalletID }}</div>
+                        <!-- 현재 금액 -->
+                        <div class="moneyArea">
+                            <h3>현재 로그인 계정 : {{this.user_info[0].name}}</h3>
+                            <h3>잔액 : {{this.user_info[0].token}} 원</h3>
+                            <h3>결제 금액 : {{this.apiResponse[0].price}} 원</h3>
+                            <!-- 잔액이 결제 금액보다 적으면 결제버튼 비활성화 -->
+                            <h3>결제 후 잔액 : {{this.payPrice}} 원</h3>
+                            <!-- 충전을 모달창에서 진행 -->
                         </div>
 
-                        <!-- 수리 이력 : N회
-                        수리 상세 이력 :  -->
-                        
-                        <button id="purchaseCar" type="button" value="Purchase" class="btn btn-primary" @click="isModalViewed = true" :disabled="this.user_info[0].name === null">구매하기</button>
-                        <div class="isLogin" v-if="this.user_info[0].name === null">* 로그인을 먼저 진행해 주세요.</div>
-                    </div>
+                        <div v-if="this.payPrice < 0">금액이 부족합니다. 금액을 먼저 충전해 주세요.</div>
+
+                        <button id="chargeToken" type="button" value="chargeToken" class="chargeToken btn btn-primary" 
+                        @click="isModalViewed = true" :disabled="this.user_info[0].name === null"
+                        v-if="this.payPrice < 0">충전</button>
+
+                        <button id="paymentCar" type="button" value="PaymentCar" class="paymentCar btn btn-primary" 
+                        @click="payCar" :disabled="this.user_info[0].name === null || this.payPrice < 0"
+                        v-if="this.payPrice > 0">결제</button>
+                    </form>
                 </div>
-                <div class="car_detail">
-                </div>
+                <!-- addressAndpay_car end -->
+
                 <!-- modal start -->
                 <ModalView v-if="isModalViewed" @close-modal="isModalViewed = false">
-                    <BuyCar />
+                    <ChargeMoney 
+                        :insufficientAmount="this.payPrice" 
+                        :walletid="this.user_info[0].name"
+                        @close-modal="isModalViewed = false"
+                    />
                 </ModalView>
                 <!-- modal end -->
             </div>
@@ -48,31 +53,34 @@
 import axios from 'axios';
 import { mapState } from 'vuex';
 
-import BuyCar from '@/components/purchase/BuyCar.vue';
 import ModalView from "@/components/purchase/ModalView.vue";
+import ChargeMoney from "@/components/purchase/ChargeMoney.vue";
 
 export default {
-    name: "ProductDetail",
+    name: "shipping",
     data() {
         return {
             apiResponse: [],
             isModalViewed: false,
             carPrice: '',
-            carDistancedriven: '',
+            shipping_address: '',
+            payPrice: 0, // 지불 금액
+            purchaseCarkey: '',
+            sellerID: '',
         };
+    },
+    components: {
+        ModalView,
+        ChargeMoney,
     },
     computed: {
         ...mapState({ // 사용자 정보 가져오기
             user_info: 'user_info', // 사용자 정보 가져오기
         }),
-        payCalculate() {
-            this.payPrice = this.user_info[0].token - this.apiResponse[0].price;
-        }
     },
-    components: {
-        BuyCar,
-        ModalView,
-    },
+    // mounted () {
+    //     this.payPrice = parseInt(this.user_info[0].token) - parseInt(this.apiResponse[0].price);
+    // },
     created () {
         console.log(1);
         console.log(this.$route.params.productId);
@@ -128,27 +136,50 @@ export default {
             console.log(this.apiResponse[0].price);
             console.log(7);
 
-            // 주행거리 , 추가
-            this.carDistancedriven = this.apiResponse[0].DistanceDriven.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            console.log(this.carDistancedriven);
-            console.log(8);
-
 
             // 차량 가격 , 추가 
             const temp_num = this.apiResponse[0].price * 0.0001;
             console.log(temp_num);
             this.carPrice = temp_num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); 
             console.log(this.carPrice);
+
+            this.payPrice = parseInt(this.user_info[0].token) - parseInt(this.apiResponse[0].price);
+
+            this.purchaseCarkey = this.$route.params.productId;
+            this.sellerID = this.apiResponse[0].walletid;
         });
+    },
+    methods: {
+        payCar() {
+            console.log(this.user_info[0].id);
+            console.log(this.$route.params.productId);
+            console.log(this.apiResponse[0].walletid);
+            
+            axios.get('/api/purchaseCar', { // shipping page 로 이동
+                params: { // parameter 전달 구문
+                    walletid: this.user_info[0].id, // 구매자
+                    walletid_1: this.apiResponse[0].walletid, // 판매자
+                    carkey: this.$route.params.productId,
+                }
+            }).then(response => { // 결과 반환 부분
+                this.$router.push({
+                    path: '/purchase'
+                })
+            })
+        }
     },
 };
 </script>
 
 <style scoped>
+/* .addressAndpay_car {
+
+} */
+
 .car_info{
     display: flex;
     justify-content: space-between;
-    /* border: 1px solid black; */
+    border: 1px solid black;
 }
 
 .car_info>.car_img {
@@ -180,54 +211,8 @@ export default {
     border: 1px solid black;
 }
 
-.car_text>button {
-    position: absolute; right: 0px; bottom: 0px;
-    margin: 15px;
-}
-
-
-.car_price_box_d {
-    font-family: Nanum Gothic;
-    text-align: right;
-    left:0; right:0; margin-left:auto; margin-right:auto;
-    top: 0; bottom:0; margin-top:auto; margin-bottom:auto;
-}
-
-.car_price_d {
-    font-weight: bold;
-    font-size: 30px;
-    color: #e65540;
-}
-
-.car_price_unit_d {
-    font-weight: bold;
-    font-size: 20px;
-}
-
-
-.car_title_d {
-    font-family: Nanum Gothic;
-    font-weight: bold;
-    font-size: 22px;
-    color: #141414;
-}
-
-.car_desc_sub_d {
-    font-family: Nanum Gothic;
-    font-weight: bold;
-    font-size: 16px;
-    margin-top: 15px;
-    color: #444444;
-}
-
-
-.isLogin {
-    font-family: Nanum Gothic;
-    font-weight: bold;
-    font-size: 15px;
-    color: #e65540;
-    position: absolute; left: 0px; bottom: 0px;
-    margin: 15px;
+.paymentCar{
+    align-self: right;
 }
 
 </style>

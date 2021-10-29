@@ -2,23 +2,23 @@
     <div>
         <div class="buycar m-text15 p-b-12">
             <!-- 상품 정보 -->
-            <h3>모델명 : {{this.apiResponse[0].model}}</h3>
-            <h3>제조사 : {{this.apiResponse[0].maker}}</h3>
-            <h3>가격 : {{this.apiResponse[0].price}}</h3>
-            <h3>판매자 : {{this.apiResponse[0].walletid}}</h3>
-            <h3>판매자 : {{this.apiResponse[0].Key}}</h3>
-
-            <!-- 트랜젝션 대기 안내 -->
-            <h3>처리가 1~2분 걸릴수 있으니 완료창이 보이기 전까지 닫지 말아주세요.</h3>
+            <div class="car_desc_sub_d">모델명 : {{ this.apiResponse[0].title }}</div>
+            <div class="car_desc_sub_d">연식 : {{ this.apiResponse[0].yeardetail }}</div>
+            <div class="car_desc_sub_d">색상 : {{ this.apiResponse[0].color }}</div>
+            <div class="car_desc_sub_d">주행거리 : {{ this.carDistancedriven }}km</div>
+            <div class="car_desc_sub_d">연료 : {{ this.apiResponse[0].fuel }}</div>
+            <div class="car_desc_sub_d">변속기 : {{ this.apiResponse[0].gearbox }}</div>
+            <div class="car_desc_sub_d">차종 : {{ this.apiResponse[0].cartype }}</div>
+            <div class="car_desc_sub_d">지역 : {{ this.apiResponse[0].region }}</div>
 
             <!-- 구매하는 차량의 정보를 확인했습니다. - 체크박스 -->
-            <label><input type="checkbox" v-model="checked" value="true">구매하는 차량의 정보와 안내사항을 확인했습니다.</label>
+            <label><input type="checkbox" v-model="checked" value="true" class="noti-check">구매하는 차량의 정보를 확인했습니다.</label>
 
 
             <!-- 구매하기 버튼 -->
             <!-- 구매 성공후 alert 띄움. -->
-            <button id="paymentCar" type="button" value="PaymentCar" class="paymentCar btn btn-primary" 
-            @click="payCar" :disabled="checked == false">결제</button>
+            <button id="buyCar" type="button" value="buyCar" class="buyCar btn btn-primary" 
+            @click="payCar" :disabled="checked == false">다음</button>
             
         </div>
     </div>
@@ -60,11 +60,33 @@ export default {
             var array = []; // 데이터 정렬용 배열
             for (var i = 0; i < data.length; i++){
                 data[i].Key = this.carkey;
+                data[i].thumbnail = data[i].Thumbnail;
+                data[i].title = data[i].Title;
+                data[i].country = data[i].Country;
+                data[i].cartype = data[i].CarType;
+                data[i].manufacturer = data[i].Manufacturer;
                 data[i].model = data[i].Model;
-                data[i].maker = data[i].Maker;
+                data[i].modelgen = data[i].ModelGen;
+                data[i].modeldetail = data[i].ModelDetail;
+                data[i].year = data[i].Year;
+                data[i].yeardetail = data[i].YearDetail;
+                data[i].distanceDriven = data[i].DistanceDriven;
                 data[i].price = data[i].Price;
+                data[i].sellercategory = data[i].SellerCategory;
+                data[i].color = data[i].Color;
+                data[i].fuel = data[i].Fuel;
+                data[i].gearbox = data[i].Gearbox;
+                data[i].option = data[i].Option;
+                data[i].accident = data[i].Accident;
+                data[i].seaters = data[i].Seaters;
+                data[i].region = data[i].Region;
+                data[i].badge = data[i].Badge;
+                data[i].insurancehistory = data[i].InsuranceHistory;
+                data[i].shipping = data[i].Shipping;
                 data[i].walletid = data[i].WalletID;
-                data[i].sellername = data[i].Sellername;
+                data[i].sellername = data[i].SellerName;
+                data[i].purchasecount = data[i].PurchaseCount;
+                data[i].repaircount = data[i].RepairCount;
                 array.push(data[i]);
             }
             console.log(array);
@@ -88,17 +110,8 @@ export default {
             console.log(this.product_carkey);
             console.log(this.product_walletid);
             
-            axios.get('/api/purchaseCar', { // controller.js 의 /api/purchaseCar 를 호출
-                params: { // parameter 전달 구문
-                    walletid: this.user_info[0].id, // 구매자
-                    walletid_1: this.product_walletid, // 판매자
-                    carkey: this.product_carkey,
-                }
-            }).then(response => { // 결과 반환 부분
-                this.$router.push({
-                    path: '/purchase'
-                })
-                this.$router.go();
+            this.$router.push({
+                path: `/purchase/paycar/`+ this.product_carkey
             })
         }
     },
@@ -112,14 +125,21 @@ export default {
     padding-right: 50px;
 
 }
+
 h3 {
     font-size: 20px;
     text-align: left;
     padding-bottom: 10px;
 }
-button.paymentCar {
+
+button.buyCar {
     position: absolute; right: 0px; bottom: 0px;
     margin-bottom: 30px;
     margin-right: 50px;
 }
+
+.noti-check{
+    margin-top: 50px;
+}
+
 </style>
