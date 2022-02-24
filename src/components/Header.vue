@@ -33,17 +33,53 @@
 
                 <!-- Header Icon -->
                 <div class="header-icons">
-                    <router-link :to="{name: 'join'}" tag="li" active-class="sale-noti" exact>
-                        <a class="header-wrapicon1 dis-block">
-                            <img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
-                            <!-- 로그인 정보 -->
-                            <span class="header_user_info"> {{ this.header_user_info }} </span>
-                        </a>
-                    </router-link>
+                    <!-- 로그인 전 사용자 정보 시작 -->
+                    <div v-if="this.user_info[0].name === null">
+                        <router-link :to="{name: 'join'}" tag="li" active-class="sale-noti" exact>
+                            <a class="header-wrapicon1 dis-block">
+                                <img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+                                <!-- 로그인 정보 -->
+                                <span class="header_user_info"> login </span>
+                            </a>
+                        </router-link>
+                    </div>
+                    <!-- 로그인 전 사용자 정보 끝 -->
+
+
+                    <!-- 로그인 후 사용자 정보 시작 -->
+                    <div class="header-wrapicon2" v-if="this.user_info[0].name != null">
+                        <img src="images/icons/icon-header-01.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+                        <!-- <span class="header-icons-noti">{{ totalCartQty }}</span> -->
+
+                        <!-- Header cart noti -->
+                        <div class="header-cart header-dropdown">
+                            <ul class="header-cart-wrapitem">
+                                
+                            </ul>
+
+                            <div class="header-cart-buttons">
+                                <div class="header-cart-wrapbtn">
+                                    <!-- Button -->
+                                    <a href="/features" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                        내 차량
+                                    </a>
+                                </div>
+
+                                <div class="header-cart-wrapbtn">
+                                    <!-- Button -->
+                                    <a herf="" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4" @click="logout">
+                                        로그아웃
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 로그인 후 사용자 정보 끝 -->
 
 
                     <span class="linedivide1"></span>
 
+                    <!-- 관심 목록 시작 -->
                     <div class="header-wrapicon2">
                         <img src="images/icons/star.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
                         <span class="header-icons-noti">{{ totalCartQty }}</span>
@@ -91,6 +127,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- 관심 목록 끝 -->
                 </div>
             </div>
         </div>
@@ -223,7 +260,7 @@ export default {
         }),
         ...mapState({ // 사용자 정보 가져오기
             user_info: 'user_info', // 사용자 정보 가져오기
-            header_user_info: 'header_user_info', // Header 에 표시할 로그인 여부
+            // header_user_info: 'header_user_info', // Header 에 표시할 로그인 여부
         }),
         ...mapGetters('cart', { // 장바구니에 담긴 상품의 총 금액을 계산한 결과를 totalCartPrice에 저장한다.
             totalCartPrice: 'totalPrice',
@@ -253,10 +290,19 @@ export default {
         },
         // test code end
         logout() {
-            this.$store.dispatch('user_login_N', 'login');
+            this.$store.dispatch('user_login_N', null);
             this.$store.dispatch('user_login_I', null); 
             this.$store.dispatch('user_login_T', null); 
             this.$store.dispatch('user_login_R', null); 
+
+            console.log(this.$route.path);
+            if (this.$route.path != '/') {
+                this.$router.push({
+                    path: '/'
+                })
+                // // 새로고침
+                // this.$router.go();
+            }
         }
     }
     

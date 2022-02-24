@@ -8,8 +8,9 @@
             <div class="cardFeild">
                 <label><input type="checkbox" v-model="isCardChecked" value="true" class="noti-check">카드</label>
                 <div class="input_card" v-if="isCardChecked === true" >
-                    카드 번호 입력
-
+                    <div>카드 정보 입력</div> 
+                    <input class="border" type="text" placeholder="카드사 입력">
+                    <input class="border" type="text" placeholder="카드 번호 입력(- 제외)">
                 </div> 
             </div>
 
@@ -18,8 +19,8 @@
             <div class="accountFeild">
                 <label><input type="checkbox" v-model="isAccountChecked" value="true" class="noti-check">계좌</label>
                 <div class="input_card" v-if="isAccountChecked === true" >
-                    계좌 이체 및 확인 클릭
-
+                    계좌 이체 후 확인 클릭
+                    <div>입금할 계좌 : 국민 153-5478223454-15</div>
                 </div>
             </div> 
 
@@ -69,7 +70,7 @@ export default {
             axios.get('/api/chargeToken', {
                 params: {
                     id: this.user_info[0].id,
-                    token: this.user_info[0].token,
+                    token: 50000000,
                 }
             }).then(response => {
                 console.log(response);

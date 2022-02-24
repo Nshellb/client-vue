@@ -737,6 +737,26 @@ id는 중복확인.
 + 스크롤바 커스텀
 + vuex 로 사진 업로드 하면서 비밀번호까지 vuex 로 관리가능하면 해보자...
 
+
+02242022
+
+로그인 기능은 vue 에서 state 를 활용하여 로그인 상태에 따른 로그인/로그아웃 버튼 변화
+
+
+갑작스런 체인 코드변경으로 인한 핫픽스 결과까지를 업로드하고 마무리 짓겠다...
+
+변경된 파일 목록
+BuyCar.vue
+ChargeMoney.vue
+CreateCar.vue
+PayCar.vue
+GetWallet.vue
+CountryFilter.vue
+SegmentFilter.vue
+
+
+
+
 --------- 생각 및 예제 분석 ---------
 IBM/evote 의 public 부분이 build 된 Vue 파일들이 들어가는 부분이다.
 (그런데 왜 ~/client/src/에도 vue 관련 파일이 있는가;;)

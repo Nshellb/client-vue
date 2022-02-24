@@ -7,10 +7,10 @@
                     <form>
                         <!-- 주소 -->
                         <h1>구매 진행</h1>
-                        <div class="address_text">
+                        <!-- <div class="address_text">
                             <span>주소:</span>
                             <input type="text" placeholder="Ex: 대전광역시 동서대로 125 한밭대학교 N4동" v-model="shipping_address">
-                        </div>
+                        </div> -->
 
                         <!-- 현재 금액 -->
                         <div class="moneyArea">
@@ -22,15 +22,29 @@
                             <!-- 충전을 모달창에서 진행 -->
                         </div>
 
-                        <div v-if="this.payPrice < 0">금액이 부족합니다. 금액을 먼저 충전해 주세요.</div>
+                        <!-- <div v-if="this.payPrice < 0">금액이 부족합니다. 금액을 먼저 충전해 주세요.</div> -->
 
                         <button id="chargeToken" type="button" value="chargeToken" class="chargeToken btn btn-primary" 
                         @click="isModalViewed = true" :disabled="this.user_info[0].name === null"
-                        v-if="this.payPrice < 0">충전</button>
+                        >충전</button>
 
                         <button id="paymentCar" type="button" value="PaymentCar" class="paymentCar btn btn-primary" 
                         @click="payCar" :disabled="this.user_info[0].name === null || this.payPrice < 0"
-                        v-if="this.payPrice > 0">결제</button>
+                        >결제</button>
+
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
                     </form>
                 </div>
                 <!-- addressAndpay_car end -->
@@ -77,6 +91,9 @@ export default {
         ...mapState({ // 사용자 정보 가져오기
             user_info: 'user_info', // 사용자 정보 가져오기
         }),
+        calPrice () {
+            this.payPrice = parseInt(this.user_info[0].token) - parseInt(this.apiResponse[0].price);
+        },
     },
     // mounted () {
     //     this.payPrice = parseInt(this.user_info[0].token) - parseInt(this.apiResponse[0].price);

@@ -5,7 +5,7 @@
             <div class="car_desc_sub_d">모델명 : {{ this.apiResponse[0].title }}</div>
             <div class="car_desc_sub_d">연식 : {{ this.apiResponse[0].yeardetail }}</div>
             <div class="car_desc_sub_d">색상 : {{ this.apiResponse[0].color }}</div>
-            <div class="car_desc_sub_d">주행거리 : {{ this.carDistancedriven }}km</div>
+            <div class="car_desc_sub_d">주행거리 : 37,541km</div>
             <div class="car_desc_sub_d">연료 : {{ this.apiResponse[0].fuel }}</div>
             <div class="car_desc_sub_d">변속기 : {{ this.apiResponse[0].gearbox }}</div>
             <div class="car_desc_sub_d">차종 : {{ this.apiResponse[0].cartype }}</div>
@@ -89,6 +89,7 @@ export default {
                 data[i].repaircount = data[i].RepairCount;
                 array.push(data[i]);
             }
+            
             console.log(array);
             this.apiResponse = array; // 화면에 출력되는 부분에 저장
             console.log(5);
