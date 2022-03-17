@@ -4,7 +4,7 @@
 Hyperledger Fabric은 private blockchain으로 IBM에서 개발한 Enterprise 목적의 blockchain이다.
 
 Vue.js로 개발한 웹클라이언트 부분에서 Node.js로 작성된 API 서버를 호출하는 방식으로 동작한다.
-
+![프로젝트 구성도](https://user-images.githubusercontent.com/24907719/158749887-5bf908ac-9ec8-47b3-aaf7-5454f831277b.png)
 
 Vue.js의 화면 출력과 관련된 Componet 구성은 다음과 같다.
 ![Vue js 구성도](https://user-images.githubusercontent.com/24907719/158749514-6a3e2221-b251-4e0c-b646-8f392211426a.png)
