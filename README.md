@@ -1,3 +1,14 @@
+21년도 캡스톤 디자인으로 개발한 "Hyperledger Fabric을 활용한 중고차 거래 시스템"의 웹 클라이언트 파트이다.
+(21.01.~21.11.)
+
+Hyperledger Fabric은 private blockchain으로 IBM에서 개발한 Enterprise 목적의 blockchain이다.
+
+Vue.js로 개발한 웹클라이언트 부분에서 Node.js로 작성된 API 서버를 호출하는 방식으로 동작한다.
+
+(개발 캡쳐부분)
+
+이하 개발노트.
+
 --------- 개발 ---------
 
 client/vue_app 프로젝트 생성
