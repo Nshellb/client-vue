@@ -12,7 +12,7 @@ Vue.js의 화면 출력과 관련된 Componet 구성은 다음과 같다.
 최종 개발된 메인페이지는 아래와 같다.
 ![메인페이지](https://user-images.githubusercontent.com/24907719/158749525-7ecae214-fa86-47af-b7ff-99055f87d3c9.png)
 
-이하 개발노트.
+이하 개발노트
 
 --------- 개발 ---------
 
