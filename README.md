@@ -1,6 +1,6 @@
-#21년도 캡스톤 디자인
+# 21년도 캡스톤 디자인
 
-##21년도 캡스톤 디자인으로 개발한 "Hyperledger Fabric을 활용한 중고차 거래 시스템"의 웹 클라이언트 파트이다.
+## 21년도 캡스톤 디자인으로 개발한 "Hyperledger Fabric을 활용한 중고차 거래 시스템"의 웹 클라이언트 파트이다.
 (21.01.~21.11.)
 
 Hyperledger Fabric은 private blockchain으로 IBM에서 개발한 Enterprise 목적의 blockchain이다.  
